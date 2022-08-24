@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<transfers xmlns="spryker:transfer-01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spryker:transfer-01 http://static.spryker.com/transfer-01.xsd">
+
+    <transfer name="FaqTranslation" >
+        <property name="fkIdQuestion" type="int"/>
+        <property name="language" type="string"/>
+        <property name="translatedQuestion" type="string"/>
+        <property name="translatedAnswer" type="string"/>
+        <property name="question" type="FaqQuestion"  />
+    </transfer>
+    <transfer name="FaqVotes" >
+        <property name="fkIdQuestion" type="int"/>
+        <property name="fkIdCustomer" type="int"/>
+        <property name="vote" type="int"/>
+        <property name="question" type="FaqQuestion" />
+    </transfer>
+
+    <transfer name="FaqQuestion" >
+        <property name="idQuestion" type="int"/>
+        <property name="question" type="string"/>
+        <property name="answer" type="string"/>
+        <property name="state" type="int"/>
+        <property name="fkIdUser" type="int"/>
+        <property name="translations" type="FaqTranslation[]" singular="translation" />
+        <property name="votes" type="FaqVotes[]" singular="vote" />
+
+    </transfer>
+
+</transfers>

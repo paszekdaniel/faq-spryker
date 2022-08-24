@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="zed"
+          xsi:noNamespaceSchemaLocation="http://static.spryker.com/schema01.xsd"
+          namespace="Orm\Zed\Faq\Persistence"
+          package="src.Orm.Zed.Faq.Persistence">
+    <table name="pyz_faq_question">
+        <column name="id_question" required="true" autoIncrement="true" primaryKey="true" type="INTEGER"/>
+        <column name="question" required="true" type="LONGVARCHAR"/>
+        <column name="answer" required="true" type="LONGVARCHAR"/>
+        <column name="state" required="true" type="INTEGER"/>
+        <column name="fk_id_user" type="INTEGER" required="true"/>
+        <foreign-key foreignTable="spy_user" onDelete="CASCADE">
+            <reference local="fk_id_user" foreign="id_user"/>
+        </foreign-key>
+    </table>
+    <table name="pyz_faq_votes">
+        <column name="fk_id_question" required="true" primaryKey="true" type="INTEGER"/>
+        <column name="fk_id_customer" required="true" primaryKey="true" type="INTEGER"/>
+        <column name="vote" required="true" type="INTEGER"/>
+        <foreign-key foreignTable="spy_customer" onDelete="CASCADE">
+            <reference local="fk_id_customer" foreign="id_customer"/>
+        </foreign-key>
+        <foreign-key foreignTable="pyz_faq_question" onDelete="CASCADE">
+            <reference local="fk_id_question" foreign="id_question"/>
+        </foreign-key>
+    </table>
+    <table name="pyz_faq_translation">
+        <column name="fk_id_question" required="true" primaryKey="true" type="INTEGER"/>
+        <column name="language" primaryKey="true" required="true" type="VARCHAR" size="32"/>
+        <column name="translated_question" required="true" type="LONGVARCHAR" />
+        <column name="translated_answer" required="true" type="LONGVARCHAR" />
+        <foreign-key foreignTable="pyz_faq_question" onDelete="CASCADE" >
+            <reference local="fk_id_question" foreign="id_question" />
+        </foreign-key>
+    </table>
+</database>
