@@ -3,6 +3,7 @@
 namespace Pyz\Zed\Faq\Business\Model;
 
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
+use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Pyz\Zed\Faq\Persistence\FaqRepositoryInterface;
 
 class FaqReaderHandler
@@ -24,5 +25,8 @@ class FaqReaderHandler
     }
     public function findActiveQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer): FaqQuestionCollectionTransfer {
         return $this->repo->findActiveQuestionsWithRelations($questionCollectionTransfer);
+    }
+    public function findQuestionById(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer {
+        return $this->repo->findQuestionById($questionTransfer);
     }
 }

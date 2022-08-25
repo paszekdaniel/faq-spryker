@@ -5,7 +5,7 @@ namespace Pyz\Zed\Faq\Business;
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Generated\Shared\Transfer\FaqTranslationTransfer;
-use Generated\Shared\Transfer\FaqVotesTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 
 interface FaqFacadeInterface
 {
@@ -26,5 +26,13 @@ interface FaqFacadeInterface
 
     public function saveTranslation(FaqTranslationTransfer $translationTransfer): FaqTranslationTransfer;
 
-    public function saveVote(FaqVotesTransfer $votesTransfer): FaqVotesTransfer;
+    public function saveVote(FaqVoteTransfer $votesTransfer): FaqVoteTransfer;
+
+    public function findQuestionById(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer;
+
+    public function deleteQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer;
+
+    public function deleteVote(FaqVoteTransfer $voteTransfer): FaqVoteTransfer;
+
+    public function deleteTranslation(FaqTranslationTransfer $translationTransfer): FaqTranslationTransfer;
 }

@@ -3,6 +3,7 @@
 namespace Pyz\Zed\Faq\Persistence;
 
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
+use Generated\Shared\Transfer\FaqQuestionTransfer;
 
 interface FaqRepositoryInterface
 {
@@ -14,4 +15,10 @@ interface FaqRepositoryInterface
 
     public function findActiveQuestions(FaqQuestionCollectionTransfer $questionCollectionTransfer): FaqQuestionCollectionTransfer;
 
+    /**
+     * returns new instance of transfer when not found
+     * @param FaqQuestionTransfer $questionTransfer
+     * @return FaqQuestionTransfer
+     */
+    public function findQuestionById(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer;
 }

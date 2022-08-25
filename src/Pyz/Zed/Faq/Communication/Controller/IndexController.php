@@ -3,10 +3,8 @@
 namespace Pyz\Zed\Faq\Communication\Controller;
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
-use Generated\Shared\Transfer\FaqTranslationTransfer;
-use Generated\Shared\Transfer\FaqVotesTransfer;
 use Pyz\Zed\Faq\Business\FaqFacadeInterface;
-use Pyz\Zed\Faq\FaqTempConfig;
+use Pyz\Zed\Faq\FaqConfig;
 use Symfony\Component\HttpFoundation\Request;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 
@@ -42,8 +40,13 @@ class IndexController extends AbstractController
 //
 //        $transfer->addVote($vote);
 //        $transfer = $this->getFacade()->saveQuestion($transfer);
-        $transfer = new FaqQuestionCollectionTransfer();
-        $transfer = $this->getFacade()->findActiveQuestions($transfer);
+//        $transfer = new FaqQuestionCollectionTransfer();
+//        $transfer = $this->getFacade()->findActiveQuestionsWithRelations($transfer);
+//        $transfer->getQuestions()->count();
+
+        $transfer = new FaqQuestionTransfer();
+        $transfer->setIdQuestion(1);
+        $transfer = $this->getFacade()->findQuestionById($transfer);
         dd($transfer);
     }
 }

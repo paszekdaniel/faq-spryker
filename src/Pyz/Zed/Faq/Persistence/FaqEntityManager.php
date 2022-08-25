@@ -4,7 +4,7 @@ namespace Pyz\Zed\Faq\Persistence;
 
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Generated\Shared\Transfer\FaqTranslationTransfer;
-use Generated\Shared\Transfer\FaqVotesTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 use Orm\Zed\Faq\Persistence\PyzFaqQuestion;
 use Orm\Zed\Faq\Persistence\PyzFaqTranslation;
 use Orm\Zed\Faq\Persistence\PyzFaqVotes;
@@ -45,7 +45,7 @@ class FaqEntityManager extends AbstractEntityManager implements FaqEntityManager
      * @throws \Propel\Runtime\Exception\PropelException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
-    public function saveVoteEntity(FaqVotesTransfer $transfer): FaqVotesTransfer {
+    public function saveVoteEntity(FaqVoteTransfer $transfer): FaqVoteTransfer {
         $query = $this->getFactory()->createFaqVotesQuery();
         $saver = $this->getFactory()->createFaqSaver();
         return $saver->saveVoteEntity($transfer, $query);
@@ -75,12 +75,12 @@ class FaqEntityManager extends AbstractEntityManager implements FaqEntityManager
     /**
      * @throws \Propel\Runtime\Exception\PropelException
      */
-    public function deleteVoteEntityByPrimaryKey(FaqVotesTransfer $transfer): FaqVotesTransfer {
+    public function deleteVoteEntityByPrimaryKey(FaqVoteTransfer $transfer): FaqVoteTransfer {
         $entity = new PyzFaqVotes();
         $entity->setFkIdQuestion($transfer->getFkIdQuestion());
         $entity->setFkIdCustomer($transfer->getFkIdCustomer());
         $entity->delete();
-        return new FaqVotesTransfer();
+        return new FaqVoteTransfer();
     }
 
 

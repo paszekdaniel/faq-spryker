@@ -4,7 +4,7 @@ namespace Pyz\Zed\Faq\Business\Model;
 
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Generated\Shared\Transfer\FaqTranslationTransfer;
-use Generated\Shared\Transfer\FaqVotesTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 use Pyz\Zed\Faq\Persistence\FaqEntityManagerInterface;
 
 
@@ -22,7 +22,7 @@ class FaqWriterHandler
     public function createFaqTranslation(FaqTranslationTransfer $transfer): FaqTranslationTransfer {
         return $this->entityManager->saveTranslationEntity($transfer);
     }
-    public function createFaqVote(FaqVotesTransfer $transfer): FaqVotesTransfer {
+    public function createFaqVote(FaqVoteTransfer $transfer): FaqVoteTransfer {
         return $this->entityManager->saveVoteEntity($transfer);
     }
 }

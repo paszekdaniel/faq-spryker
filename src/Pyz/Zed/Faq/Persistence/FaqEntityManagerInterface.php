@@ -5,6 +5,7 @@ namespace Pyz\Zed\Faq\Persistence;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Generated\Shared\Transfer\FaqTranslationTransfer;
 use Generated\Shared\Transfer\FaqVotesTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 
 interface FaqEntityManagerInterface
 {
@@ -23,7 +24,7 @@ interface FaqEntityManagerInterface
      * @throws \Propel\Runtime\Exception\PropelException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
-    public function saveVoteEntity(FaqVotesTransfer $transfer): FaqVotesTransfer;
+    public function saveVoteEntity(FaqVoteTransfer $transfer): FaqVoteTransfer;
     /**
      * @throws \Propel\Runtime\Exception\PropelException
      */
@@ -35,5 +36,5 @@ interface FaqEntityManagerInterface
     /**
      * @throws \Propel\Runtime\Exception\PropelException
      */
-    public function deleteVoteEntityByPrimaryKey(FaqVotesTransfer $transfer): FaqVotesTransfer;
+    public function deleteVoteEntityByPrimaryKey(FaqVoteTransfer $transfer): FaqVoteTransfer;
 }

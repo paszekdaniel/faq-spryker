@@ -6,6 +6,7 @@ use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Generated\Shared\Transfer\FaqTranslationTransfer;
 use Generated\Shared\Transfer\FaqVotesTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 
 class FaqMapper
 {
@@ -28,7 +29,7 @@ class FaqMapper
                 }
                 if (!$question->getPyzFaqVotess()->isEmpty()) {
                     foreach ($question->getPyzFaqVotess() as $voteEntity) {
-                        $vote = (new FaqVotesTransfer())->fromArray($voteEntity->toArray());
+                        $vote = (new FaqVoteTransfer())->fromArray($voteEntity->toArray());
                         $temp->addVote($vote);
                     }
                 }

@@ -5,6 +5,7 @@ namespace Pyz\Zed\Faq\Persistence\Helpers;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Generated\Shared\Transfer\FaqTranslationTransfer;
 use Generated\Shared\Transfer\FaqVotesTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 use Orm\Zed\Faq\Persistence\PyzFaqTranslation;
 use Orm\Zed\Faq\Persistence\PyzFaqVotes;
 
@@ -72,7 +73,7 @@ class FaqSaver
      * @throws \Propel\Runtime\Exception\PropelException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
-    public function saveVoteEntity(FaqVotesTransfer $transfer, \Orm\Zed\Faq\Persistence\PyzFaqVotesQuery $query): FaqVotesTransfer {
+    public function saveVoteEntity(FaqVoteTransfer $transfer, \Orm\Zed\Faq\Persistence\PyzFaqVotesQuery $query): FaqVoteTransfer {
         $voteEntity = $query
             ->filterByFkIdQuestion($transfer->getFkIdQuestion())
             ->filterByFkIdCustomer($transfer->getFkIdCustomer())

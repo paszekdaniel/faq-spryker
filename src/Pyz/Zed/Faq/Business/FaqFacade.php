@@ -5,7 +5,7 @@ namespace Pyz\Zed\Faq\Business;
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Generated\Shared\Transfer\FaqTranslationTransfer;
-use Generated\Shared\Transfer\FaqVotesTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -34,7 +34,7 @@ class FaqFacade extends AbstractFacade implements FaqFacadeInterface
         return $this->getFactory()->getFaqWriterHandler()->createFaqTranslation($translationTransfer);
     }
 
-    public function saveVote(FaqVotesTransfer $votesTransfer): FaqVotesTransfer
+    public function saveVote(FaqVoteTransfer $votesTransfer): FaqVoteTransfer
     {
         return $this->getFactory()->getFaqWriterHandler()->createFaqVote($votesTransfer);
     }
@@ -47,5 +47,25 @@ class FaqFacade extends AbstractFacade implements FaqFacadeInterface
     public function findActiveQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer
     ): FaqQuestionCollectionTransfer {
         return $this->getFactory()->getFaqReaderHandler()->findActiveQuestionsWithRelations($questionCollectionTransfer);
+    }
+
+    public function findQuestionById(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
+    {
+        return $this->getFactory()->getFaqReaderHandler()->findQuestionById($questionTransfer);
+    }
+
+    public function deleteQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
+    {
+        return $this->getFactory()->getFaqDeleterHandler()->deleteQuestion($questionTransfer);
+    }
+
+    public function deleteVote(FaqVoteTransfer $voteTransfer): FaqVoteTransfer
+    {
+        return $this->getFactory()->getFaqDeleterHandler()->deleteVote($voteTransfer);
+    }
+
+    public function deleteTranslation(FaqTranslationTransfer $translationTransfer): FaqTranslationTransfer
+    {
+        return $this->getFactory()->getFaqDeleterHandler()->deleteTranslation($translationTransfer);
     }
 }

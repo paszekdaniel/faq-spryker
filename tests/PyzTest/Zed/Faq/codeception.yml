@@ -14,7 +14,7 @@ coverage:
 suites:
     Business:
         path: Business
-        class_name: StringReverserBusinessTester
+        class_name: FaqBusinessTester
         modules:
             enabled:
                 - Asserts
