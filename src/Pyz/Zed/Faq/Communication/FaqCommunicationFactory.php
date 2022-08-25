@@ -2,12 +2,15 @@
 
 namespace Pyz\Zed\Faq\Communication;
 
+use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Orm\Zed\Faq\Persistence\PyzFaqQuestionQuery;
+use Pyz\Zed\Faq\Communication\Form\FaqQuestionForm;
 use Pyz\Zed\Faq\Communication\Table\FaqTable;
 use Pyz\Zed\Faq\FaqDependencyProvider;
 use Pyz\Zed\Faq\Persistence\FaqEntityManagerInterface;
 use Pyz\Zed\Faq\Persistence\FaqRepositoryInterface;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * @method FaqEntityManagerInterface getEntityManager()
@@ -25,5 +28,14 @@ class FaqCommunicationFactory extends AbstractCommunicationFactory
 
     private function getQuestionQuery(): PyzFaqQuestionQuery {
         return $this->getProvidedDependency(FaqDependencyProvider::QUERY_QUESTION);
+    }
+
+    public function createFaqQuestionForm(?FaqQuestionTransfer $transfer = null, array $options = []): FormInterface
+    {
+        return $this->getFormFactory()->create(
+            FaqQuestionForm::class,
+            $transfer,
+            $options
+        );
     }
 }

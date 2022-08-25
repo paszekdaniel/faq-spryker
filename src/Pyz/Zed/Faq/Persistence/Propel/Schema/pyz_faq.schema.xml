@@ -9,7 +9,7 @@
         <column name="question" required="true" type="LONGVARCHAR"/>
         <column name="answer" required="true" type="LONGVARCHAR"/>
         <column name="state" required="true" type="INTEGER"/>
-        <column name="fk_id_user" type="INTEGER" required="true"/>
+        <column name="fk_id_user" type="INTEGER" required="false"/>
         <foreign-key foreignTable="spy_user" onDelete="CASCADE">
             <reference local="fk_id_user" foreign="id_user"/>
         </foreign-key>

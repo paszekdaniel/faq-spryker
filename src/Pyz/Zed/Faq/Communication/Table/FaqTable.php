@@ -6,6 +6,7 @@ use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Orm\Zed\Faq\Persistence\Map\PyzFaqQuestionTableMap;
 use Orm\Zed\Faq\Persistence\PyzFaqQuestionQuery;
+use Pyz\Zed\Faq\FaqConfig;
 use Pyz\Zed\Faq\Persistence\FaqEntityManagerInterface;
 use Pyz\Zed\Faq\Persistence\FaqRepositoryInterface;
 use Spryker\Zed\Gui\Communication\Table\AbstractTable;
@@ -18,8 +19,13 @@ class FaqTable extends AbstractTable
     private PyzFaqQuestionQuery $query;
     public const COL_ACTIONS = 'actions';
 
-    public function __construct(FaqEntityManagerInterface $entityManager, FaqRepositoryInterface $repository, PyzFaqQuestionQuery $query)
-    {
+    private const MAX_LENGTH = 25;
+
+    public function __construct(
+        FaqEntityManagerInterface $entityManager,
+        FaqRepositoryInterface $repository,
+        PyzFaqQuestionQuery $query
+    ) {
         $this->entityManager = $entityManager;
         $this->repository = $repository;
         $this->query = $query;
@@ -51,33 +57,54 @@ class FaqTable extends AbstractTable
 
     protected function prepareData(TableConfiguration $config)
     {
-        $collection = new FaqQuestionCollectionTransfer();
-        $collection = $this->repository->findActiveQuestionsWithRelations($collection);
+//        $collection = new FaqQuestionCollectionTransfer();
+//        $collection = $this->repository->findActiveQuestionsWithRelations($collection);
+//        $this->query
+        $collection = $this->runQuery(
+            $this->query,
+            $config
+        );
         $questionRows = [];
-        foreach ($collection->getQuestions() as $question) {
+        foreach ($collection as $question) {
             $row = [];
-            $row[PyzFaqQuestionTableMap::COL_QUESTION] = $question->getQuestion();
-            $row[PyzFaqQuestionTableMap::COL_ANSWER] = $question->getAnswer();
-            $row[PyzFaqQuestionTableMap::COL_STATE] = $question->getState();
+//            $row[PyzFaqQuestionTableMap::COL_QUESTION] = $question->getQuestion();
+//            $row[PyzFaqQuestionTableMap::COL_ANSWER] = $question->getAnswer();
+//            $row[PyzFaqQuestionTableMap::COL_STATE] = $question->getState();
+            $row[PyzFaqQuestionTableMap::COL_ANSWER] =  substr($question[PyzFaqQuestionTableMap::COL_ANSWER],0, self::MAX_LENGTH) . '...';
+            $row[PyzFaqQuestionTableMap::COL_QUESTION] =  substr($question[PyzFaqQuestionTableMap::COL_QUESTION],0, self::MAX_LENGTH) . '...';
+//            $row[PyzFaqQuestionTableMap::COL_STATE] = $this->mapStateToText($question[PyzFaqQuestionTableMap::COL_STATE]);
+            $row[PyzFaqQuestionTableMap::COL_STATE] = ($question[PyzFaqQuestionTableMap::COL_STATE]);
             $row[self::COL_ACTIONS] = $this->generateItemButtons($question);
 
-            $questionRows[]= $row;
+            $questionRows[] = $row;
         }
         return $questionRows;
     }
-    protected function generateItemButtons(FaqQuestionTransfer $question) {
+
+    protected function generateItemButtons($question)
+    {
         $btnGroup = [];
         $btnGroup[] = $this->createButtonGroupItem(
             "Edit",
-            "/planet/edit?id={$question->getIdQuestion()}"
+            "/faq/edit?id=". $question[PyzFaqQuestionTableMap::COL_ID_QUESTION]
         );
         $btnGroup[] = $this->createButtonGroupItem(
             "Delete",
-            "/planet/delete?id={$question->getIdQuestion()}"
+            "/faq/delete?id=". $question[PyzFaqQuestionTableMap::COL_ID_QUESTION]
         );
+//        $btnGroup[] = $this->createButtonGroupItem(
+//            "Delete",
+//            "/faq/toggle-state?id=". $question[PyzFaqQuestionTableMap::COL_ID_QUESTION]
+//        );
         return $this->generateButtonGroup(
             $btnGroup,
             'Actions'
         );
+    }
+    protected function mapStateToText(int $state) {
+        if($state == FaqConfig::ACTIVE_STATE) {
+            return "active";
+        }
+        return "inactive";
     }
 }

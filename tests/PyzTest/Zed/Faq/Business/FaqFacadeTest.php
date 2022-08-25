@@ -55,8 +55,6 @@ class FaqFacadeTest extends Unit
 
         $resultDeleted = $this->tester->getFacade()->findQuestionById($toFound);
         $this->assertNull($resultDeleted->getIdQuestion());
-
-
     }
 
     public function testFindActiveQuestions(): void {

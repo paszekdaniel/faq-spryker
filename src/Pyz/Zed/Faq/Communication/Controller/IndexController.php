@@ -15,13 +15,13 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 class IndexController extends AbstractController
 {
     public function indexAction(Request $request) {
-//        $transfer = new FaqQuestionTransfer();
-//        $transfer->setState(FaqTempConfig::INACTIVE_STATE);
-//        $transfer->setIdQuestion(4);
-//        $transfer->setFkIdUser(1);
-//        $transfer->setQuestion("Yep");
-//        $transfer->setAnswer("No");
-//        $this->getFacade()->saveQuestion($transfer);
+        $transfer = new FaqQuestionTransfer();
+        $transfer->setState(FaqConfig::INACTIVE_STATE);
+        $transfer->setIdQuestion(4);
+        $transfer->setFkIdUser(1);
+        $transfer->setQuestion("Yep");
+        $transfer->setAnswer("Nooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+        $this->getFacade()->saveQuestion($transfer);
 //
 //        $translation = new FaqTranslationTransfer();
 //        $translation->setLanguage("PL");
