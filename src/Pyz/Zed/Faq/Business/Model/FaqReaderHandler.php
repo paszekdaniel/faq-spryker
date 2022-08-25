@@ -17,6 +17,6 @@ class FaqReaderHandler
         return $this->repo->findAllQuestions($questionCollectionTransfer);
     }
     public function findActiveQuestions(FaqQuestionCollectionTransfer $questionCollectionTransfer): FaqQuestionCollectionTransfer {
-        return $this->repo->findActiveQuestions($questionCollectionTransfer);
+        return $this->repo->findAllQuestionsWithRelations($questionCollectionTransfer);
     }
 }

@@ -4,6 +4,8 @@ namespace Pyz\Zed\Faq\Business;
 
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
+use Generated\Shared\Transfer\FaqTranslationTransfer;
+use Generated\Shared\Transfer\FaqVotesTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -25,5 +27,15 @@ class FaqFacade extends AbstractFacade implements FaqFacadeInterface
     public function findActiveQuestions(FaqQuestionCollectionTransfer $questionCollectionTransfer
     ): FaqQuestionCollectionTransfer {
         return $this->getFactory()->getFaqReaderHandler()->findActiveQuestions($questionCollectionTransfer);
+    }
+
+    public function saveTranslation(FaqTranslationTransfer $translationTransfer): FaqTranslationTransfer
+    {
+        return $this->getFactory()->getFaqWriterHandler()->createFaqTranslation($translationTransfer);
+    }
+
+    public function saveVote(FaqVotesTransfer $votesTransfer): FaqVotesTransfer
+    {
+        return $this->getFactory()->getFaqWriterHandler()->createFaqVote($votesTransfer);
     }
 }

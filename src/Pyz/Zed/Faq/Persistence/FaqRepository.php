@@ -16,13 +16,18 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
 
     public function findAllQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer
     ): FaqQuestionCollectionTransfer {
-        // TODO: Implement findAllQuestionsWithRelations() method.
+        $questionsEntities = $this->getFactory()->createFaqQuestionQuery()->find();
+        $questionsEntities->populateRelation('PyzFaqTranslation');
+        $questionsEntities->populateRelation('PyzFaqVotes');
+        $transfer = new FaqQuestionCollectionTransfer();
+        $result = FaqMapper::mapQuestionCollectionEntityToTransferCollection($transfer, $questionsEntities );
+        return $result;
     }
 
     public function findAllQuestions(FaqQuestionCollectionTransfer $questionCollectionTransfer
     ): FaqQuestionCollectionTransfer {
-        $questions = $this->getFactory()->createFaqQuestionQuery()->find();
-        return FaqMapper::mapQuestionCollectionEntityToTransferCollection($questionCollectionTransfer, $questions);
+        $questionsEntities = $this->getFactory()->createFaqQuestionQuery()->find();
+        return FaqMapper::mapQuestionCollectionEntityToTransferCollection($questionCollectionTransfer, $questionsEntities);
     }
 
     public function findActiveQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer
@@ -35,7 +40,7 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
      */
     public function findActiveQuestions(FaqQuestionCollectionTransfer $questionCollectionTransfer
     ): FaqQuestionCollectionTransfer {
-        $questions = $this->getFactory()->createFaqQuestionQuery()->filterByState(FaqTempConfig::ACTIVE_STATE)->find();
-        return FaqMapper::mapQuestionCollectionEntityToTransferCollection($questionCollectionTransfer, $questions);
+        $questionsEntities = $this->getFactory()->createFaqQuestionQuery()->filterByState(FaqTempConfig::ACTIVE_STATE)->find();
+        return FaqMapper::mapQuestionCollectionEntityToTransferCollection($questionCollectionTransfer, $questionsEntities);
     }
 }

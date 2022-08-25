@@ -23,15 +23,20 @@ class IndexController extends AbstractController
 //        $transfer->setFkIdUser(1);
 //
 //        $translation = new FaqTranslationTransfer();
-//        $translation->setLanguage("AT");
-//        $translation->setTranslatedQuestion("ich bin da");
-//        $translation->setTranslatedAnswer("JAAAAAAAAAAA ja yep");
+//        $translation->setLanguage("PL");
+//        $translation->setTranslatedQuestion("jej adas");
+//        $translation->setTranslatedAnswer("kukułka");
+//        $translation->setFkIdQuestion(1);
+//        $this->getFacade()->saveTranslation($translation);
 //
 //        $transfer->addTranslation($translation);
 //
 //        $vote = new FaqVotesTransfer();
 //        $vote->setVote(FaqTempConfig::VOTE_UP);
-//        $vote->setFkIdCustomer(1);
+//        $vote->setFkIdCustomer(5);
+//        $vote->setFkIdQuestion(1);
+//        $this->getFacade()->saveVote($vote);
+
 //
 //        $transfer->addVote($vote);
 //        $transfer = $this->getFacade()->saveQuestion($transfer);
