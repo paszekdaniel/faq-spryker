@@ -15,20 +15,22 @@ class FaqMapper
      * @return FaqQuestionCollectionTransfer
      */
     public static function mapQuestionCollectionEntityToTransferCollection(
-        FaqQuestionCollectionTransfer $questionCollectionTransfer, $questions): FaqQuestionCollectionTransfer
+        FaqQuestionCollectionTransfer $questionCollectionTransfer, $questions, bool $mapRelations = false): FaqQuestionCollectionTransfer
     {
         foreach ($questions as $question) {
             $temp = (new FaqQuestionTransfer())->fromArray($question->toArray());
-            if(!$question->getPyzFaqTranslations()->isEmpty()) {
-                foreach ($question->getPyzFaqTranslations() as $translationEntity) {
-                    $translation = (new FaqTranslationTransfer())->fromArray($translationEntity->toArray());
-                    $temp->addTranslation($translation);
+            if($mapRelations) {
+                if(!$question->getPyzFaqTranslations()->isEmpty()) {
+                    foreach ($question->getPyzFaqTranslations() as $translationEntity) {
+                        $translation = (new FaqTranslationTransfer())->fromArray($translationEntity->toArray());
+                        $temp->addTranslation($translation);
+                    }
                 }
-            }
-            if (!$question->getPyzFaqVotess()->isEmpty()) {
-                foreach ($question->getPyzFaqVotess() as $voteEntity) {
-                    $vote = (new FaqVotesTransfer())->fromArray($voteEntity->toArray());
-                    $temp->addVote($vote);
+                if (!$question->getPyzFaqVotess()->isEmpty()) {
+                    foreach ($question->getPyzFaqVotess() as $voteEntity) {
+                        $vote = (new FaqVotesTransfer())->fromArray($voteEntity->toArray());
+                        $temp->addVote($vote);
+                    }
                 }
             }
             $questionCollectionTransfer->addQuestion($temp);

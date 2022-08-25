@@ -20,8 +20,7 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
         $questionsEntities->populateRelation('PyzFaqTranslation');
         $questionsEntities->populateRelation('PyzFaqVotes');
         $transfer = new FaqQuestionCollectionTransfer();
-        $result = FaqMapper::mapQuestionCollectionEntityToTransferCollection($transfer, $questionsEntities );
-        return $result;
+        return FaqMapper::mapQuestionCollectionEntityToTransferCollection($transfer, $questionsEntities, true);
     }
 
     public function findAllQuestions(FaqQuestionCollectionTransfer $questionCollectionTransfer
@@ -32,7 +31,11 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
 
     public function findActiveQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer
     ): FaqQuestionCollectionTransfer {
-        // TODO: Implement findActiveQuestions() method.
+        $questionsEntities = $this->getFactory()->createFaqQuestionQuery()->filterByState(FaqTempConfig::ACTIVE_STATE)->find();
+        $questionsEntities->populateRelation('PyzFaqTranslation');
+        $questionsEntities->populateRelation('PyzFaqVotes');
+        $transfer = new FaqQuestionCollectionTransfer();
+        return FaqMapper::mapQuestionCollectionEntityToTransferCollection($transfer, $questionsEntities, true);
     }
 
     /**

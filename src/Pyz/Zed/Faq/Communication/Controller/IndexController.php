@@ -17,10 +17,12 @@ class IndexController extends AbstractController
 {
     public function indexAction(Request $request) {
 //        $transfer = new FaqQuestionTransfer();
-//        $transfer->setQuestion("testing question");
-//        $transfer->setAnswer("my answer");
-//        $transfer->setState(FaqTempConfig::ACTIVE_STATE);
+//        $transfer->setState(FaqTempConfig::INACTIVE_STATE);
+//        $transfer->setIdQuestion(4);
 //        $transfer->setFkIdUser(1);
+//        $transfer->setQuestion("Yep");
+//        $transfer->setAnswer("No");
+//        $this->getFacade()->saveQuestion($transfer);
 //
 //        $translation = new FaqTranslationTransfer();
 //        $translation->setLanguage("PL");

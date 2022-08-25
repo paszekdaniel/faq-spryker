@@ -38,4 +38,14 @@ class FaqFacade extends AbstractFacade implements FaqFacadeInterface
     {
         return $this->getFactory()->getFaqWriterHandler()->createFaqVote($votesTransfer);
     }
+
+    public function findAllQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer
+    ): FaqQuestionCollectionTransfer {
+        return $this->getFactory()->getFaqReaderHandler()->findAllQuestionsWithRelations($questionCollectionTransfer);
+    }
+
+    public function findActiveQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer
+    ): FaqQuestionCollectionTransfer {
+        return $this->getFactory()->getFaqReaderHandler()->findActiveQuestionsWithRelations($questionCollectionTransfer);
+    }
 }
