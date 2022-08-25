@@ -34,6 +34,7 @@ class FaqSaver
          * @var $transfer FaqQuestionTransfer
          */
         $transfer = $this->mapAndSave($transfer, $questionEntity) ;
+        //no associated objects where passed
         if($transfer->getTranslations()->count() === 0 && $transfer->getVotes()->count() === 0) {
             return $transfer;
         }

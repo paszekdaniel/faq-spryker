@@ -1,9 +1,10 @@
 <?php
 
-namespace Pyz\Zed\Faq\Business;
+namespace Pyz\Zed\Faq\Business\Model;
 
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Pyz\Zed\Faq\Persistence\FaqEntityManagerInterface;
+
 
 class FaqWriterHandler
 {

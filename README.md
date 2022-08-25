@@ -3,5 +3,8 @@ tables relations: faq diagram.png <br>
 
 ## TODO:
 [x] define schema and generate diagram <br>
-[ ] dto <br>
-[ ] CRUD in persistence layer with unit tests
+[x] dto <br>
+#### Persistence
+[x] Working saving everything (using findOneOrCreate like previously) <br>
+[x] Working cascade save <br>
+

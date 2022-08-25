@@ -23,7 +23,10 @@
         <property name="fkIdUser" type="int"/>
         <property name="translations" type="FaqTranslation[]" singular="translation" />
         <property name="votes" type="FaqVotes[]" singular="vote" />
+    </transfer>
 
+    <transfer name="FaqQuestionCollection">
+        <property name="questions" type="FaqQuestion[]" singular="question" />
     </transfer>
 
 </transfers>

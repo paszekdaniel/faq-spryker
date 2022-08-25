@@ -2,9 +2,7 @@
 
 namespace Pyz\Zed\Faq\Persistence;
 
-use Orm\Zed\Faq\Persistence\PyzFaqQuestion;
 use Orm\Zed\Faq\Persistence\PyzFaqQuestionQuery;
-use Orm\Zed\Faq\Persistence\PyzFaqTranslation;
 use Orm\Zed\Faq\Persistence\PyzFaqTranslationQuery;
 use Orm\Zed\Faq\Persistence\PyzFaqVotesQuery;
 use Pyz\Zed\Faq\Persistence\Helpers\FaqSaver;
