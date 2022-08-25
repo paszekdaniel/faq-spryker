@@ -5,7 +5,6 @@ namespace Pyz\Zed\Faq\Persistence\Helpers;
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Generated\Shared\Transfer\FaqTranslationTransfer;
-use Generated\Shared\Transfer\FaqVotesTransfer;
 use Generated\Shared\Transfer\FaqVoteTransfer;
 
 class FaqMapper
@@ -13,6 +12,7 @@ class FaqMapper
     /**
      * @param FaqQuestionCollectionTransfer $questionCollectionTransfer
      * @param mixed $questions this is collection of entities
+     * @param bool $mapRelations
      * @return FaqQuestionCollectionTransfer
      */
     public static function mapQuestionCollectionEntityToTransferCollection(
@@ -27,8 +27,8 @@ class FaqMapper
                         $temp->addTranslation($translation);
                     }
                 }
-                if (!$question->getPyzFaqVotess()->isEmpty()) {
-                    foreach ($question->getPyzFaqVotess() as $voteEntity) {
+                if (!$question->getPyzFaqVotes()->isEmpty()) {
+                    foreach ($question->getPyzFaqVotes() as $voteEntity) {
                         $vote = (new FaqVoteTransfer())->fromArray($voteEntity->toArray());
                         $temp->addVote($vote);
                     }

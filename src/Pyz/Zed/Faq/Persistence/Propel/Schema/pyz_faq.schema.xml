@@ -14,7 +14,7 @@
             <reference local="fk_id_user" foreign="id_user"/>
         </foreign-key>
     </table>
-    <table name="pyz_faq_votes">
+    <table name="pyz_faq_vote">
         <column name="fk_id_question" required="true" primaryKey="true" type="INTEGER"/>
         <column name="fk_id_customer" required="true" primaryKey="true" type="INTEGER"/>
         <column name="vote" required="true" type="INTEGER"/>

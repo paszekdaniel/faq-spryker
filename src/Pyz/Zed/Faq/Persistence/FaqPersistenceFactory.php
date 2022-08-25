@@ -4,7 +4,7 @@ namespace Pyz\Zed\Faq\Persistence;
 
 use Orm\Zed\Faq\Persistence\PyzFaqQuestionQuery;
 use Orm\Zed\Faq\Persistence\PyzFaqTranslationQuery;
-use Orm\Zed\Faq\Persistence\PyzFaqVotesQuery;
+use Orm\Zed\Faq\Persistence\PyzFaqVoteQuery;
 use Pyz\Zed\Faq\Persistence\Helpers\FaqSaver;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 
@@ -18,9 +18,9 @@ class FaqPersistenceFactory extends AbstractPersistenceFactory
     {
         return PyzFaqTranslationQuery::create();
     }
-    public function createFaqVotesQuery(): PyzFaqVotesQuery
+    public function createFaqVotesQuery(): PyzFaqVoteQuery
     {
-        return PyzFaqVotesQuery::create();
+        return PyzFaqVoteQuery::create();
     }
     public function createFaqSaver(): FaqSaver {
         return new FaqSaver();

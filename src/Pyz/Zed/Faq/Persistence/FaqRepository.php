@@ -18,7 +18,7 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
     ): FaqQuestionCollectionTransfer {
         $questionsEntities = $this->getFactory()->createFaqQuestionQuery()->find();
         $questionsEntities->populateRelation('PyzFaqTranslation');
-        $questionsEntities->populateRelation('PyzFaqVotes');
+        $questionsEntities->populateRelation('PyzFaqVote');
         $transfer = new FaqQuestionCollectionTransfer();
         return FaqMapper::mapQuestionCollectionEntityToTransferCollection($transfer, $questionsEntities, true);
     }
@@ -33,7 +33,7 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
     ): FaqQuestionCollectionTransfer {
         $questionsEntities = $this->getFactory()->createFaqQuestionQuery()->filterByState(FaqConfig::ACTIVE_STATE)->find();
         $questionsEntities->populateRelation('PyzFaqTranslation');
-        $questionsEntities->populateRelation('PyzFaqVotes');
+        $questionsEntities->populateRelation('PyzFaqVote');
         $transfer = new FaqQuestionCollectionTransfer();
         return FaqMapper::mapQuestionCollectionEntityToTransferCollection($transfer, $questionsEntities, true);
     }

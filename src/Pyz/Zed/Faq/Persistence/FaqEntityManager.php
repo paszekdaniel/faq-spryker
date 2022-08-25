@@ -7,7 +7,7 @@ use Generated\Shared\Transfer\FaqTranslationTransfer;
 use Generated\Shared\Transfer\FaqVoteTransfer;
 use Orm\Zed\Faq\Persistence\PyzFaqQuestion;
 use Orm\Zed\Faq\Persistence\PyzFaqTranslation;
-use Orm\Zed\Faq\Persistence\PyzFaqVotes;
+use Orm\Zed\Faq\Persistence\PyzFaqVote;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
 /**
@@ -76,7 +76,7 @@ class FaqEntityManager extends AbstractEntityManager implements FaqEntityManager
      * @throws \Propel\Runtime\Exception\PropelException
      */
     public function deleteVoteEntityByPrimaryKey(FaqVoteTransfer $transfer): FaqVoteTransfer {
-        $entity = new PyzFaqVotes();
+        $entity = new PyzFaqVote();
         $entity->setFkIdQuestion($transfer->getFkIdQuestion());
         $entity->setFkIdCustomer($transfer->getFkIdCustomer());
         $entity->delete();

@@ -3,6 +3,7 @@
 namespace Pyz\Zed\Faq\Communication\Controller;
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 use Pyz\Zed\Faq\Business\FaqFacadeInterface;
 use Pyz\Zed\Faq\FaqConfig;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,23 +31,24 @@ class IndexController extends AbstractController
 //        $this->getFacade()->saveTranslation($translation);
 //
 //        $transfer->addTranslation($translation);
-//
-//        $vote = new FaqVotesTransfer();
-//        $vote->setVote(FaqTempConfig::VOTE_UP);
-//        $vote->setFkIdCustomer(5);
-//        $vote->setFkIdQuestion(1);
+
+//        $vote = new FaqVoteTransfer();
+//        $vote->setVote(FaqConfig::VOTE_UP);
+//        $vote->setFkIdCustomer(4);
+//        $vote->setFkIdQuestion(2);
 //        $this->getFacade()->saveVote($vote);
+//        dd($vote);
 
 //
 //        $transfer->addVote($vote);
 //        $transfer = $this->getFacade()->saveQuestion($transfer);
-//        $transfer = new FaqQuestionCollectionTransfer();
-//        $transfer = $this->getFacade()->findActiveQuestionsWithRelations($transfer);
-//        $transfer->getQuestions()->count();
-
-        $transfer = new FaqQuestionTransfer();
-        $transfer->setIdQuestion(1);
-        $transfer = $this->getFacade()->findQuestionById($transfer);
+        $transfer = new FaqQuestionCollectionTransfer();
+////        $transfer = $this->getFacade()->findActiveQuestionsWithRelations($transfer);
+////        $transfer->getQuestions()->count();
+//
+//        $transfer = new FaqQuestionTransfer();
+//        $transfer->setIdQuestion(1);
+        $transfer = $this->getFacade()->findActiveQuestionsWithRelations($transfer);
         dd($transfer);
     }
 }

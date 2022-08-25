@@ -59,4 +59,14 @@ class FaqFacadeTest extends Unit
 
     }
 
+    public function testFindActiveQuestions(): void {
+        $transfer = (new FaqQuestionCollectionBuilder())->build();
+        /**
+         * @var FaqQuestionCollectionTransfer $result
+         */
+        $result = $this->tester->getFacade()->findActiveQuestions($transfer);
+        foreach ($result->getQuestions() as $question) {
+            $this->assertEquals($question->getState(), FaqConfig::ACTIVE_STATE);
+        }
+    }
 }

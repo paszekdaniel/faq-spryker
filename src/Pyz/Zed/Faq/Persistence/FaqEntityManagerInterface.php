@@ -4,7 +4,6 @@ namespace Pyz\Zed\Faq\Persistence;
 
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Generated\Shared\Transfer\FaqTranslationTransfer;
-use Generated\Shared\Transfer\FaqVotesTransfer;
 use Generated\Shared\Transfer\FaqVoteTransfer;
 
 interface FaqEntityManagerInterface
