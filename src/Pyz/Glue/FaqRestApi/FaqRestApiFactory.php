@@ -3,6 +3,8 @@
 namespace Pyz\Glue\FaqRestApi;
 
 use Pyz\Client\FaqRestApi\FaqRestApiClientInterface;
+use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqChanger;
+use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqChangerInterface;
 use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqReader;
 use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqReaderInterface;
 use Pyz\Glue\FaqRestApi\Processor\Mapper\FaqResourceMapper;
@@ -20,6 +22,13 @@ class FaqRestApiFactory extends AbstractFactory
 
     public function createFaqReader(): FaqReaderInterface {
         return new FaqReader(
+            $this->getClient(),
+            $this->getResourceBuilder(),
+            $this->createFaqResourceMapper()
+        );
+    }
+    public function createFaqChanger(): FaqChangerInterface {
+        return new FaqChanger(
             $this->getClient(),
             $this->getResourceBuilder(),
             $this->createFaqResourceMapper()

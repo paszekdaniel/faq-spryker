@@ -13,10 +13,10 @@ class FaqResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePlug
 
     public function configure(ResourceRouteCollectionInterface $resourceRouteCollection
     ): ResourceRouteCollectionInterface {
-        $resourceRouteCollection->addGet('get', false);
-//            ->addPost('post', false)
-//            ->addPatch('patch', false)
-//            ->addDelete('delete', false);
+        $resourceRouteCollection->addGet('get', false)
+            ->addPost('post', false)
+            ->addPatch('patch', false)
+            ->addDelete('delete', false);
         return $resourceRouteCollection;
     }
 

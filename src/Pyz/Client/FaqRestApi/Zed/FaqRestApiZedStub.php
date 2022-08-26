@@ -34,4 +34,34 @@ class FaqRestApiZedStub implements FaqRestApiZedStubInterface
 
         return $questionTransfer;
     }
+
+    public function createQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
+    {
+        /**
+         * @var FaqQuestionTransfer $questionTransfer
+         */
+        $questionTransfer = $this->zedRequestClient->call('/faq/gateway/create-question', $questionTransfer);
+
+        return $questionTransfer;
+    }
+
+    public function updateQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
+    {
+        /**
+         * @var FaqQuestionTransfer $questionTransfer
+         */
+        $questionTransfer = $this->zedRequestClient->call('/faq/gateway/update-question', $questionTransfer);
+
+        return $questionTransfer;
+    }
+
+    public function deleteQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
+    {
+        /**
+         * @var FaqQuestionTransfer $questionTransfer
+         */
+        $questionTransfer = $this->zedRequestClient->call('/faq/gateway/delete-question', $questionTransfer);
+
+        return $questionTransfer;
+    }
 }

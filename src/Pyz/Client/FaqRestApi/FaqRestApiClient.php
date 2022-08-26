@@ -20,4 +20,19 @@ class FaqRestApiClient extends AbstractClient implements FaqRestApiClientInterfa
     {
         return $this->getFactory()->createFaqZedStub()->getOneQuestion($questionTransfer);
     }
+
+    public function createFaqQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
+    {
+        return $this->getFactory()->createFaqZedStub()->createQuestion($questionTransfer);
+    }
+
+    public function updateFaqQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
+    {
+        return $this->getFactory()->createFaqZedStub()->updateQuestion($questionTransfer);
+    }
+
+    public function deleteFaqQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
+    {
+        return $this->getFactory()->createFaqZedStub()->deleteQuestion($questionTransfer);
+    }
 }

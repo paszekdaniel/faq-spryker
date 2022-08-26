@@ -59,13 +59,15 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
     {
 //        TODO: 3 queries!!! fix it
         $question = $this->getFactory()->createFaqQuestionQuery()->filterByIdQuestion($questionTransfer->getIdQuestion())->findOne();
-        $question->getPyzFaqTranslations();
-        $question->getPyzFaqVotes();
 
         $questionTransfer = new FaqQuestionTransfer();
         if(!$question) {
             return $questionTransfer;
         }
+
+        $question->getPyzFaqTranslations();
+        $question->getPyzFaqVotes();
+
         $questionTransfer = FaqMapper::mapQuestionEntityToTransfer($questionTransfer, $question, true);
         return $questionTransfer;
     }
