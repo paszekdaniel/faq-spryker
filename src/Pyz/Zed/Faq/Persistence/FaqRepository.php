@@ -34,6 +34,7 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
         $questionsEntities = $this->getFactory()->createFaqQuestionQuery()->filterByState(FaqConfig::ACTIVE_STATE)->find();
         $questionsEntities->populateRelation('PyzFaqTranslation');
         $questionsEntities->populateRelation('PyzFaqVote');
+
         $transfer = new FaqQuestionCollectionTransfer();
         return FaqMapper::mapQuestionCollectionEntityToTransferCollection($transfer, $questionsEntities, true);
     }
@@ -47,13 +48,27 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
         return FaqMapper::mapQuestionCollectionEntityToTransferCollection($questionCollectionTransfer, $questionsEntities);
     }
 
+    /**
+     * TODO: 3 queries!!! fix it
+     * @param FaqQuestionTransfer $questionTransfer
+     * @return FaqQuestionTransfer
+     * @throws \Propel\Runtime\Exception\PropelException
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
     public function findQuestionById(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
     {
+//        TODO: 3 queries!!! fix it
         $question = $this->getFactory()->createFaqQuestionQuery()->filterByIdQuestion($questionTransfer->getIdQuestion())->findOne();
+
+        $questionTransfer = new FaqQuestionTransfer();
         if(!$question) {
-            return new FaqQuestionTransfer();
+            return $questionTransfer;
         }
-        $questionTransfer->fromArray($question->toArray());
+
+        $question->getPyzFaqTranslations();
+        $question->getPyzFaqVotes();
+
+        $questionTransfer = FaqMapper::mapQuestionEntityToTransfer($questionTransfer, $question, true);
         return $questionTransfer;
     }
 }

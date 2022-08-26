@@ -4,7 +4,11 @@ tables relations: faq diagram.png <br>
 ## TODO:
 [x] define schema and generate diagram <br>
 [x] dto <br>
-#### Persistence
-[x] Working saving everything (using findOneOrCreate like previously) <br>
-[x] Working cascade save <br>
 
+### US1
+[x] Use translation table
+[ ] Create form with other languages
+
+## PROBLEMS:
+- Glue API is FaqRestApi, instead of FaqsRestApi(S!), so data.type is faq, not faqs
+-

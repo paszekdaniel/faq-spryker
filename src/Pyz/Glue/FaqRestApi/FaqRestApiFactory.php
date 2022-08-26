@@ -1,0 +1,37 @@
+<?php
+
+namespace Pyz\Glue\FaqRestApi;
+
+use Pyz\Client\FaqRestApi\FaqRestApiClientInterface;
+use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqChanger;
+use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqChangerInterface;
+use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqReader;
+use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqReaderInterface;
+use Pyz\Glue\FaqRestApi\Processor\Mapper\FaqResourceMapper;
+use Pyz\Glue\FaqRestApi\Processor\Mapper\FaqResourceMapperInterface;
+use Spryker\Glue\Kernel\AbstractFactory;
+
+/**
+ * @method FaqRestApiClientInterface getClient()
+ */
+class FaqRestApiFactory extends AbstractFactory
+{
+    public function createFaqResourceMapper(): FaqResourceMapperInterface {
+        return new FaqResourceMapper();
+    }
+
+    public function createFaqReader(): FaqReaderInterface {
+        return new FaqReader(
+            $this->getClient(),
+            $this->getResourceBuilder(),
+            $this->createFaqResourceMapper()
+        );
+    }
+    public function createFaqChanger(): FaqChangerInterface {
+        return new FaqChanger(
+            $this->getClient(),
+            $this->getResourceBuilder(),
+            $this->createFaqResourceMapper()
+        );
+    }
+}
