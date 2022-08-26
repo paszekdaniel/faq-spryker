@@ -2,10 +2,10 @@
 
 namespace Orm\Zed\Faq\Persistence;
 
-use Orm\Zed\Faq\Persistence\Base\PyzFaqVotesQuery as BasePyzFaqVotesQuery;
+use Orm\Zed\Faq\Persistence\Base\PyzFaqVoteQuery as BasePyzFaqVoteQuery;
 
 /**
- * Skeleton subclass for performing query and update operations on the 'pyz_faq_votes' table.
+ * Skeleton subclass for performing query and update operations on the 'pyz_faq_vote' table.
  *
  *
  *
@@ -13,7 +13,7 @@ use Orm\Zed\Faq\Persistence\Base\PyzFaqVotesQuery as BasePyzFaqVotesQuery;
  * application requirements.  This class will only be generated as
  * long as it does not already exist in the output directory.
  */
-class PyzFaqVotesQuery extends BasePyzFaqVotesQuery
+class PyzFaqVoteQuery extends BasePyzFaqVoteQuery
 {
 
 }

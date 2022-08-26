@@ -9,12 +9,12 @@
         <column name="question" required="true" type="LONGVARCHAR"/>
         <column name="answer" required="true" type="LONGVARCHAR"/>
         <column name="state" required="true" type="INTEGER"/>
-        <column name="fk_id_user" type="INTEGER" required="true"/>
+        <column name="fk_id_user" type="INTEGER" required="false"/>
         <foreign-key foreignTable="spy_user" onDelete="CASCADE">
             <reference local="fk_id_user" foreign="id_user"/>
         </foreign-key>
     </table>
-    <table name="pyz_faq_votes">
+    <table name="pyz_faq_vote">
         <column name="fk_id_question" required="true" primaryKey="true" type="INTEGER"/>
         <column name="fk_id_customer" required="true" primaryKey="true" type="INTEGER"/>
         <column name="vote" required="true" type="INTEGER"/>
