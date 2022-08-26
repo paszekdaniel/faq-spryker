@@ -35,7 +35,7 @@ class EditController extends AbstractController
             } else {
                 $this->addSuccessMessage("Question was updated successfully!");
             }
-            return $this->redirectResponse('/faq/list');
+            return $this->redirectResponse('/faq');
         }
 
         return $this->viewResponse([

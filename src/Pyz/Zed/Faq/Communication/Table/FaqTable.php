@@ -72,8 +72,8 @@ class FaqTable extends AbstractTable
 //            $row[PyzFaqQuestionTableMap::COL_STATE] = $question->getState();
             $row[PyzFaqQuestionTableMap::COL_ANSWER] =  substr($question[PyzFaqQuestionTableMap::COL_ANSWER],0, self::MAX_LENGTH) . '...';
             $row[PyzFaqQuestionTableMap::COL_QUESTION] =  substr($question[PyzFaqQuestionTableMap::COL_QUESTION],0, self::MAX_LENGTH) . '...';
-//            $row[PyzFaqQuestionTableMap::COL_STATE] = $this->mapStateToText($question[PyzFaqQuestionTableMap::COL_STATE]);
-            $row[PyzFaqQuestionTableMap::COL_STATE] = ($question[PyzFaqQuestionTableMap::COL_STATE]);
+            $row[PyzFaqQuestionTableMap::COL_STATE] = $this->mapStateToText($question[PyzFaqQuestionTableMap::COL_STATE]);
+//            $row[PyzFaqQuestionTableMap::COL_STATE] = ($question[PyzFaqQuestionTableMap::COL_STATE]);
             $row[self::COL_ACTIONS] = $this->generateItemButtons($question);
 
             $questionRows[] = $row;

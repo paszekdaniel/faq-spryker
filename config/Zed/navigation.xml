@@ -340,6 +340,13 @@
         <title>Administration</title>
         <icon>fa-users-cog</icon>
         <pages>
+            <faq>
+                <label>Faq</label>
+                <title>Faq</title>
+                <bundle>faq</bundle>
+                <controller>index</controller>
+                <action>index</action>
+            </faq>
             <stores>
                 <label>Stores</label>
                 <title>Stores</title>

@@ -23,6 +23,6 @@ class DeleteController extends AbstractController
 
         $this->addSuccessMessage("Deleted question");
 
-        return $this->redirectResponse('/faq/list');
+        return $this->redirectResponse('/faq');
     }
 }

@@ -44,7 +44,7 @@ class CreateController extends AbstractController
             } else {
                 $this->addSuccessMessage("Question was added successfully!");
             }
-            return $this->redirectResponse('/faq/list');
+            return $this->redirectResponse('/faq');
         }
 
         return $this->viewResponse([
