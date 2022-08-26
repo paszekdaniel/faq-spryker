@@ -41,6 +41,6 @@ class FaqCommunicationFactory extends AbstractCommunicationFactory
         );
     }
     public function getLocaleFacade():  LocaleFacadeInterface {
-        return $this->getProvidedDependency(FaqDependencyProvider::LOCALE_FACADE);
+        return $this->getProvidedDependency(FaqDependencyProvider::LOCALE_FACADE_COMMUNICATION);
     }
 }

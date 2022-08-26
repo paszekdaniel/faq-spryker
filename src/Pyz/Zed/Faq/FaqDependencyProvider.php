@@ -9,16 +9,21 @@ use Spryker\Zed\Kernel\Container;
 class FaqDependencyProvider extends AbstractBundleDependencyProvider
 {
     public const QUERY_QUESTION = 'QUERY_QUESTION';
-    public const LOCALE_FACADE = 'LOCALE_FACADE';
+    public const LOCALE_FACADE_COMMUNICATION = 'LOCALE_FACADE_COMMUNICATION';
+    public const LOCALE_FACADE_BUSINESS = 'LOCALE_FACADE_BUSINESS';
     public const USER_FACADE = 'USER_FACADE';
 
     public function provideCommunicationLayerDependencies(Container $container)
     {
         $container = $this->addPyzFaqQuestionQuery($container);
-//        TODO: business??
-        $container = $this->addLocaleFacade($container);
+        $container = $this->addLocaleFacadeCommunication($container);
         $container = $this->addUserFacade($container);
 
+        return $container;
+    }
+    public function provideBusinessLayerDependencies(Container $container)
+    {
+        $container = $this->addLocaleFacadeBusiness($container);
         return $container;
     }
 
@@ -32,9 +37,18 @@ class FaqDependencyProvider extends AbstractBundleDependencyProvider
         );
         return $container;
     }
-    private function addLocaleFacade(Container $container): Container {
+    private function addLocaleFacadeCommunication(Container $container): Container {
         $container->set(
-            static::LOCALE_FACADE,
+            static::LOCALE_FACADE_COMMUNICATION,
+            function (Container $container) {
+                return $container->getLocator()->locale()->facade();
+            }
+        );
+        return $container;
+    }
+    private function addLocaleFacadeBusiness(Container $container): Container {
+        $container->set(
+            static::LOCALE_FACADE_BUSINESS,
             function (Container $container) {
                 return $container->getLocator()->locale()->facade();
             }
