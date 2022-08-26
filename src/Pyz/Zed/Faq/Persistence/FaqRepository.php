@@ -29,6 +29,9 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
         return FaqMapper::mapQuestionCollectionEntityToTransferCollection($questionCollectionTransfer, $questionsEntities);
     }
 
+    /**
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
     public function findActiveQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer
     ): FaqQuestionCollectionTransfer {
         $questionsEntities = $this->getFactory()->createFaqQuestionQuery()->filterByState(FaqConfig::ACTIVE_STATE)->find();
@@ -58,6 +61,9 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
     public function findQuestionById(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
     {
 //        TODO: 3 queries!!! fix it?
+//        Not sure if it is possible to fetch all 3 at once, because findOne is just limit(1)&find()
+//        So there is again problem that with and limit can't be together when there is one-to-many relationship
+
         $question = $this->getFactory()->createFaqQuestionQuery()
 //            ->leftJoinWithPyzFaqTranslation()
 //            ->leftJoinWithPyzFaqVote()
