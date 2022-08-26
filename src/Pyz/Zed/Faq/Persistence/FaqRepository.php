@@ -36,7 +36,7 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
         $questionsEntities->populateRelation('PyzFaqVote');
 
         $transfer = new FaqQuestionCollectionTransfer();
-        $transfer = FaqMapper::mapQuestionCollectionEntityToTransferCollection($transfer, $questionsEntities, true);
+        return FaqMapper::mapQuestionCollectionEntityToTransferCollection($transfer, $questionsEntities, true);
     }
 
     /**
