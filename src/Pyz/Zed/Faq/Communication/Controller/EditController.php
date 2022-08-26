@@ -28,7 +28,9 @@ class EditController extends AbstractController
              * @var FaqQuestionTransfer $questionTransfer
              */
             $questionTransfer = $faqQuestionForm->getData();
-//            $questionTransfer->setFkIdUser()
+            $currentUser = $this->getFactory()->getUserFacade()->getCurrentUser();
+            $questionTransfer->setFkIdUser($currentUser->getIdUser());
+
             $result = $this->getFacade()->saveQuestion($questionTransfer);
             if (!$result) {
                 $this->addErrorMessage("Sth went wrong! I need to change sth maybe");

@@ -11,6 +11,7 @@ use Pyz\Zed\Faq\Persistence\FaqEntityManagerInterface;
 use Pyz\Zed\Faq\Persistence\FaqRepositoryInterface;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
+use Spryker\Zed\User\Business\UserFacadeInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
@@ -42,5 +43,8 @@ class FaqCommunicationFactory extends AbstractCommunicationFactory
     }
     public function getLocaleFacade():  LocaleFacadeInterface {
         return $this->getProvidedDependency(FaqDependencyProvider::LOCALE_FACADE_COMMUNICATION);
+    }
+    public function getUserFacade(): UserFacadeInterface{
+        return $this->getProvidedDependency(FaqDependencyProvider::USER_FACADE);
     }
 }

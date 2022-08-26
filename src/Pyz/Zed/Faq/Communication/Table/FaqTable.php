@@ -98,6 +98,7 @@ class FaqTable extends AbstractTable
         return substr($text, 0, self::MAX_LENGTH) . '...';
     }
 
+//    Can't use FaqBusinessMapper::translate, because it is model, not transfer!
     protected function generateTranslatedQuestion(PyzFaqQuestion $question) {
         foreach ($question->getPyzFaqTranslations() as $translation) {
             /**
