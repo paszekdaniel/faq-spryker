@@ -57,8 +57,12 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
      */
     public function findQuestionById(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
     {
-//        TODO: 3 queries!!! fix it
-        $question = $this->getFactory()->createFaqQuestionQuery()->filterByIdQuestion($questionTransfer->getIdQuestion())->findOne();
+//        TODO: 3 queries!!! fix it?
+        $question = $this->getFactory()->createFaqQuestionQuery()
+//            ->leftJoinWithPyzFaqTranslation()
+//            ->leftJoinWithPyzFaqVote()
+            ->filterByIdQuestion($questionTransfer->getIdQuestion())
+            ->findOne();
 
         $questionTransfer = new FaqQuestionTransfer();
         if(!$question) {
@@ -67,7 +71,6 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
 
         $question->getPyzFaqTranslations();
         $question->getPyzFaqVotes();
-
         $questionTransfer = FaqMapper::mapQuestionEntityToTransfer($questionTransfer, $question, true);
         return $questionTransfer;
     }
