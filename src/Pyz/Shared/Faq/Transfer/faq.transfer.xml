@@ -21,6 +21,8 @@
         <property name="answer" type="string"/>
         <property name="state" type="int"/>
         <property name="fkIdUser" type="int"/>
+        <property name="votesUp" type="int"/>
+        <property name="votesDown" type="int"/>
         <property name="translations" type="FaqTranslation[]" singular="translation" />
         <property name="votes" type="FaqVote[]" singular="vote" />
     </transfer>
