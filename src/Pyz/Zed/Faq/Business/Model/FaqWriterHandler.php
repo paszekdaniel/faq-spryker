@@ -12,6 +12,9 @@ class FaqWriterHandler
 {
     private FaqEntityManagerInterface $entityManager;
 
+    /**
+     * @param FaqEntityManagerInterface $entityManager
+     */
     public function __construct(FaqEntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;

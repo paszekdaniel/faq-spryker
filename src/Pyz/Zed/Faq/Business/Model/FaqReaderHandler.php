@@ -13,6 +13,10 @@ class FaqReaderHandler
     private FaqRepositoryInterface $repo;
     private LocaleFacadeInterface $localeFacade;
 
+    /**
+     * @param FaqRepositoryInterface $repo
+     * @param LocaleFacadeInterface $localeFacade
+     */
     public function __construct(FaqRepositoryInterface $repo, LocaleFacadeInterface $localeFacade)
     {
         $this->repo = $repo;

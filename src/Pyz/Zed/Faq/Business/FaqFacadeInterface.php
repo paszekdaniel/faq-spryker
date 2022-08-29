@@ -16,18 +16,37 @@ interface FaqFacadeInterface
      */
     public function saveQuestion(FaqQuestionTransfer $transfer): FaqQuestionTransfer;
 
-    public function findAllQuestions(FaqQuestionCollectionTransfer $questionCollectionTransfer): FaqQuestionCollectionTransfer;
+    public function findAllQuestions(FaqQuestionCollectionTransfer $questionCollectionTransfer
+    ): FaqQuestionCollectionTransfer;
 
-    public function findActiveQuestions(FaqQuestionCollectionTransfer $questionCollectionTransfer): FaqQuestionCollectionTransfer;
+    public function findActiveQuestions(FaqQuestionCollectionTransfer $questionCollectionTransfer
+    ): FaqQuestionCollectionTransfer;
 
-    public function findAllQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer): FaqQuestionCollectionTransfer;
+    /**
+     * Automatically translates questions based on locale
+     * @param FaqQuestionCollectionTransfer $questionCollectionTransfer
+     * @return FaqQuestionCollectionTransfer
+     */
+    public function findAllQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer
+    ): FaqQuestionCollectionTransfer;
 
-    public function findActiveQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer): FaqQuestionCollectionTransfer;
+    /**
+     * Automatically translates questions based on locale
+     * @param FaqQuestionCollectionTransfer $questionCollectionTransfer
+     * @return FaqQuestionCollectionTransfer
+     */
+    public function findActiveQuestionsWithRelations(FaqQuestionCollectionTransfer $questionCollectionTransfer
+    ): FaqQuestionCollectionTransfer;
 
     public function saveTranslation(FaqTranslationTransfer $translationTransfer): FaqTranslationTransfer;
 
     public function saveVote(FaqVoteTransfer $votesTransfer): FaqVoteTransfer;
 
+    /**
+     * Automatically translates questions based on locale
+     * @param FaqQuestionTransfer $questionTransfer
+     * @return FaqQuestionTransfer
+     */
     public function findQuestionById(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer;
 
     public function deleteQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer;

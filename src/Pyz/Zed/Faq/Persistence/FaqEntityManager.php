@@ -56,9 +56,12 @@ class FaqEntityManager extends AbstractEntityManager implements FaqEntityManager
      */
     public function deleteQuestionEntityByPrimaryKey(FaqQuestionTransfer $transfer): FaqQuestionTransfer {
         $entity = new PyzFaqQuestion();
-        $entity->setIdQuestion($transfer->getIdQuestion())->delete();
+        $id = $transfer->getIdQuestion();
+        $entity->setIdQuestion($id)->delete();
         //return empty???
-        return new FaqQuestionTransfer();
+        $transfer = new FaqQuestionTransfer();
+        $transfer->setIdQuestion($id);
+        return $transfer;
     }
 
     /**

@@ -1,0 +1,14 @@
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    questions: _view.questions
+} %}
+
+{% block content %}
+    <div>
+        {% for question in data.questions %}
+        <h2>{{ question.getQuestion }}</h2>
+        <h3>{{ question.getANswer }}</h3>
+        {% endfor %}
+    </div>
+{% endblock %}

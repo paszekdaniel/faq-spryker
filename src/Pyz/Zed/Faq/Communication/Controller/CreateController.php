@@ -18,14 +18,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class CreateController extends AbstractController
 {
-//    TODO: maybe retrieve user id from session
-//    private Security $security;
-//
-//    public function __construct(Security $security)
-//    {
-//        $this->security = $security;
-//    }
-
     public function indexAction(Request $request)
     {
         $transfer = new FaqQuestionTransfer();
