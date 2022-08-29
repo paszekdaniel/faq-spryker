@@ -7,6 +7,6 @@ use Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface;
 
 interface FaqReaderInterface
 {
-    public function getFaqQuestions(RestRequestInterface $restRequest): RestResponseInterface;
+    public function getActiveFaqQuestions(RestRequestInterface $restRequest): RestResponseInterface;
     public function getOneFaqQuestion(RestRequestInterface $restRequest): RestResponseInterface;
 }
