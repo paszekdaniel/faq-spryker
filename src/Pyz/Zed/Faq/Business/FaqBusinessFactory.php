@@ -8,6 +8,7 @@ use Pyz\Zed\Faq\Business\Model\FaqWriterHandler;
 use Pyz\Zed\Faq\FaqDependencyProvider;
 use Pyz\Zed\Faq\Persistence\FaqEntityManagerInterface;
 use Pyz\Zed\Faq\Persistence\FaqRepositoryInterface;
+use Spryker\Zed\Customer\Business\CustomerFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -24,5 +25,8 @@ class FaqBusinessFactory extends AbstractBusinessFactory
     }
     public function getFaqDeleterHandler(): FaqDeleterHandler {
         return new FaqDeleterHandler($this->getEntityManager());
+    }
+    public function getCustomerFacade(): CustomerFacadeInterface {
+        return $this->getProvidedDependency(FaqDependencyProvider::CUSTOMER_FACADE);
     }
 }

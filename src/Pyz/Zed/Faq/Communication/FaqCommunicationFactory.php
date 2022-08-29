@@ -9,6 +9,7 @@ use Pyz\Zed\Faq\Communication\Table\FaqTable;
 use Pyz\Zed\Faq\FaqDependencyProvider;
 use Pyz\Zed\Faq\Persistence\FaqEntityManagerInterface;
 use Pyz\Zed\Faq\Persistence\FaqRepositoryInterface;
+use Spryker\Zed\Customer\Business\CustomerFacadeInterface;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
 use Spryker\Zed\User\Business\UserFacadeInterface;
@@ -46,5 +47,8 @@ class FaqCommunicationFactory extends AbstractCommunicationFactory
     }
     public function getUserFacade(): UserFacadeInterface{
         return $this->getProvidedDependency(FaqDependencyProvider::USER_FACADE);
+    }
+    public function getCustomerFacade(): ?CustomerFacadeInterface {
+        return $this->getProvidedDependency(FaqDependencyProvider::CUSTOMER_FACADE);
     }
 }

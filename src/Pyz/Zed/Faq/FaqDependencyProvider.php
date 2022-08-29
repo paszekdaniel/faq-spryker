@@ -12,18 +12,21 @@ class FaqDependencyProvider extends AbstractBundleDependencyProvider
     public const LOCALE_FACADE_COMMUNICATION = 'LOCALE_FACADE_COMMUNICATION';
     public const LOCALE_FACADE_BUSINESS = 'LOCALE_FACADE_BUSINESS';
     public const USER_FACADE = 'USER_FACADE';
+    public const CUSTOMER_FACADE = 'CUSTOMER_FACADE';
 
     public function provideCommunicationLayerDependencies(Container $container)
     {
         $container = $this->addPyzFaqQuestionQuery($container);
         $container = $this->addLocaleFacadeCommunication($container);
         $container = $this->addUserFacade($container);
+        $container = $this->addCustomerFacade($container);
 
         return $container;
     }
     public function provideBusinessLayerDependencies(Container $container)
     {
         $container = $this->addLocaleFacadeBusiness($container);
+//        $container = $this->addUserFacade($container);
         return $container;
     }
 
@@ -63,5 +66,13 @@ class FaqDependencyProvider extends AbstractBundleDependencyProvider
             }
         );
         return $container;
+    }
+    private function addCustomerFacade(Container $container): Container {
+        $container->set(
+            static::CUSTOMER_FACADE,
+            function (Container $container) {
+                return $container->getLocator()->customer()->facade();
+            }
+        );
     }
 }

@@ -17,12 +17,15 @@ class IndexController extends AbstractController
         $collection = $this->getClient()->getActiveFaqQuestionCollection($collection);
         $data = ['questions' => $collection->getQuestions()];
 //        foreach ($collection->getQuestions() as $question) {
-//            $question->getQuestion()
+//            $question->getIdQuestion()
 //        }
         return $this->view(
             $data,
             [],
             '@Faq/views/index/index.twig'
         );
+    }
+    public function voteUpAction(Request $request) {
+        dd($request);
     }
 }
