@@ -14,7 +14,7 @@ class FaqResourceController extends AbstractController
 {
     public function getAction(RestRequestInterface $restRequest): RestResponseInterface {
         if(!$restRequest->getResource()->getId()) {
-            return $this->getFactory()->createFaqReader()->getFaqQuestions($restRequest);
+            return $this->getFactory()->createFaqReader()->getActiveFaqQuestions($restRequest);
         } else {
             return $this->getFactory()->createFaqReader()->getOneFaqQuestion($restRequest);
         }

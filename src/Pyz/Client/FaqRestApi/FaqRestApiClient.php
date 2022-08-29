@@ -13,7 +13,7 @@ class FaqRestApiClient extends AbstractClient implements FaqRestApiClientInterfa
 {
     public function getFaqQuestionCollection(FaqQuestionCollectionTransfer $questionCollectionTransfer
     ): FaqQuestionCollectionTransfer {
-        return $this->getFactory()->createFaqZedStub()->getQuestionCollection($questionCollectionTransfer);
+        return $this->getFactory()->createFaqZedStub()->getActiveQuestionCollection($questionCollectionTransfer);
     }
 
     public function getOneFaqQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer

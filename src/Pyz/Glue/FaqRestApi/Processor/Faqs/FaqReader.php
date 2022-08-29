@@ -38,7 +38,7 @@ class FaqReader implements FaqReaderInterface
         $restResponse->addResource($restResource);
     }
 
-    public function getFaqQuestions(RestRequestInterface $restRequest): RestResponseInterface
+    public function getActiveFaqQuestions(RestRequestInterface $restRequest): RestResponseInterface
     {
         $restResponse = $this->restResourceBuilder->createRestResponse();
         $faqCollectionTransfer = $this->faqClient->getFaqQuestionCollection(new FaqQuestionCollectionTransfer());
