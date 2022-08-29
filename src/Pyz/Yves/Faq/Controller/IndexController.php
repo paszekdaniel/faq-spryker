@@ -17,7 +17,8 @@ class IndexController extends AbstractController
         $collection = $this->getClient()->getActiveFaqQuestionCollection($collection);
         $data = ['questions' => $collection->getQuestions()];
 //        foreach ($collection->getQuestions() as $question) {
-//            $question->getIdQuestion()
+////            $question->getIdQuestion();
+////            $question->getVo
 //        }
         return $this->view(
             $data,
