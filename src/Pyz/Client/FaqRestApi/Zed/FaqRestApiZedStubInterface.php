@@ -4,6 +4,7 @@ namespace Pyz\Client\FaqRestApi\Zed;
 
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
+use Generated\Shared\Transfer\FaqVoteCollectionTransfer;
 use Generated\Shared\Transfer\FaqVoteTransfer;
 
 interface FaqRestApiZedStubInterface
@@ -17,4 +18,7 @@ interface FaqRestApiZedStubInterface
     public function createFaqVote(FaqVoteTransfer $transfer): FaqVoteTransfer;
     public function updateFaqVote(FaqVoteTransfer $transfer): FaqVoteTransfer;
     public function deleteFaqVote(FaqVoteTransfer $transfer): FaqVoteTransfer;
+
+    public function getAllVotes(FaqVoteCollectionTransfer $collectionTransfer): FaqVoteCollectionTransfer;
+    public function getVoteByKey(FaqVoteTransfer $voteTransfer): FaqVoteTransfer;
 }

@@ -4,6 +4,8 @@ namespace Pyz\Zed\Faq\Persistence;
 
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
+use Generated\Shared\Transfer\FaqVoteCollectionTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 
 interface FaqRepositoryInterface
 {
@@ -21,4 +23,7 @@ interface FaqRepositoryInterface
      * @return FaqQuestionTransfer
      */
     public function findQuestionById(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer;
+
+    public function findAllVotes(FaqVoteCollectionTransfer $collectionTransfer): FaqVoteCollectionTransfer;
+    public function findVoteByKey(FaqVoteTransfer $voteTransfer): FaqVoteTransfer;
 }

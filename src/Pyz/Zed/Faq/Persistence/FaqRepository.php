@@ -4,6 +4,8 @@ namespace Pyz\Zed\Faq\Persistence;
 
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
+use Generated\Shared\Transfer\FaqVoteCollectionTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 use Pyz\Zed\Faq\FaqConfig;
 use Pyz\Zed\Faq\Persistence\Helpers\FaqMapper;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
@@ -79,5 +81,30 @@ class FaqRepository extends AbstractRepository implements FaqRepositoryInterface
         $question->getPyzFaqVotes();
         $questionTransfer = FaqMapper::mapQuestionEntityToTransfer($questionTransfer, $question, true);
         return $questionTransfer;
+    }
+
+    public function findAllVotes(FaqVoteCollectionTransfer $collectionTransfer): FaqVoteCollectionTransfer
+    {
+        $votes = $this->getFactory()->createFaqVotesQuery()
+            ->find();
+        foreach ($votes as $vote) {
+            $transfer = new FaqVoteTransfer();
+            $transfer->fromArray($vote->toArray());
+            $collectionTransfer->addVote($transfer);
+        }
+        return $collectionTransfer;
+    }
+
+    public function findVoteByKey(FaqVoteTransfer $voteTransfer): FaqVoteTransfer
+    {
+        $vote = $this->getFactory()->createFaqVotesQuery()
+            ->filterByFkIdCustomer($voteTransfer->getFkIdCustomer())
+            ->filterByFkIdQuestion($voteTransfer->getFkIdQuestion())
+            ->findOne();
+
+        if(!$vote) {
+            return new FaqVoteTransfer();
+        }
+        return $voteTransfer->fromArray($vote->toArray());
     }
 }

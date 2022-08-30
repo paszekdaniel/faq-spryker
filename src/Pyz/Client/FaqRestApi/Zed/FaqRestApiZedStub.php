@@ -4,6 +4,7 @@ namespace Pyz\Client\FaqRestApi\Zed;
 
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
+use Generated\Shared\Transfer\FaqVoteCollectionTransfer;
 use Generated\Shared\Transfer\FaqVoteTransfer;
 use Spryker\Client\ZedRequest\ZedRequestClientInterface;
 
@@ -95,5 +96,25 @@ class FaqRestApiZedStub implements FaqRestApiZedStubInterface
         $transfer = $this->zedRequestClient->call('/faq/gateway/delete-vote', $transfer);
 
         return $transfer;
+    }
+
+    public function getAllVotes(FaqVoteCollectionTransfer $collectionTransfer): FaqVoteCollectionTransfer
+    {
+        /**
+         * @var FaqVoteCollectionTransfer $collectionTransfer
+         */
+        $collectionTransfer = $this->zedRequestClient->call('/faq/gateway/find-all-votes', $collectionTransfer);
+
+        return $collectionTransfer;
+    }
+
+    public function getVoteByKey(FaqVoteTransfer $voteTransfer): FaqVoteTransfer
+    {
+        /**
+         * @var FaqVoteTransfer $voteTransfer
+         */
+        $voteTransfer = $this->zedRequestClient->call('/faq/gateway/find-vote-by-key', $voteTransfer);
+
+        return $voteTransfer;
     }
 }

@@ -48,7 +48,7 @@ class FaqVotesChanger implements FaqVotesChangerInterface
     private function addTransferToResponse(FaqVoteTransfer $transfer,  RestResponseInterface $restResponse): RestResponseInterface
     {
         $restResource = $this->restResourceBuilder->createRestResource(
-            FaqRestApiConfig::RESOURCE_FAQ,
+            FaqRestApiConfig::VOTES_FAQ,
             $this->faqResourceMapper->generateVoteRestId($transfer),
             $this->faqResourceMapper->mapFaqVotesDataToFaqVoteRestAttributes($transfer)
         );
@@ -135,7 +135,7 @@ class FaqVotesChanger implements FaqVotesChangerInterface
             return $restResponse;
         }
         $voteTransfer = $this->faqClient->deleteFaqVote($voteTransfer);
-//      No info about error in persistence
+//      No info about error from persistence
         $this->addTransferToResponse($voteTransfer, $restResponse);
 
         return $restResponse;
