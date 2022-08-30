@@ -31,7 +31,7 @@ class FaqVotesChanger implements FaqVotesChangerInterface
         $this->faqResourceMapper = $faqResourceMapper;
         $this->customerClient = $customerClient;
     }
-    private function requestAndCustomerToTransfer(RestRequestInterface $restRequest): FaqVoteTransfer
+    private function mapRequestAndCustomerToTransfer(RestRequestInterface $restRequest): FaqVoteTransfer
     {
         $transfer = new FaqVoteTransfer();
         $data = $restRequest->getResource()->toArray()['attributes'];
@@ -40,15 +40,26 @@ class FaqVotesChanger implements FaqVotesChangerInterface
         $transfer->setFkIdCustomer($customer->getIdCustomer());
         return $transfer;
     }
-    private function generateIdBasedOnPrimaryKey(FaqVoteTransfer $transfer): string
+    private function authorizationGuard(FaqVoteTransfer $transfer): bool {
+        $customer = $this->customerClient->getCustomer();
+        return $customer->getIdCustomer() == $transfer->getFkIdCustomer();
+    }
+
+    private function addTransferToResponse(FaqVoteTransfer $transfer,  RestResponseInterface $restResponse): RestResponseInterface
     {
-        return  $transfer->getFkIdQuestion() . '|'. $transfer->getFkIdCustomer();
+        $restResource = $this->restResourceBuilder->createRestResource(
+            FaqRestApiConfig::RESOURCE_FAQ,
+            $this->faqResourceMapper->generateVoteRestId($transfer),
+            $this->faqResourceMapper->mapFaqVotesDataToFaqVoteRestAttributes($transfer)
+        );
+        $restResponse->addResource($restResource);
+        return $restResponse;
     }
 
     public function createFaqVote(RestRequestInterface $restRequest): RestResponseInterface {
         $restResponse = $this->restResourceBuilder->createRestResponse();
 
-        $voteTransfer = $this->requestAndCustomerToTransfer($restRequest);
+        $voteTransfer = $this->mapRequestAndCustomerToTransfer($restRequest);
 
         $voteTransfer = $this->faqClient->createFaqVote($voteTransfer);
 
@@ -59,22 +70,74 @@ class FaqVotesChanger implements FaqVotesChangerInterface
             $restResponse->addError($errorTransfer);
             return $restResponse;
         }
-        $restResource = $this->restResourceBuilder->createRestResource(
-            FaqRestApiConfig::RESOURCE_FAQ,
-            $this->generateIdBasedOnPrimaryKey($voteTransfer),
-            $this->faqResourceMapper->mapFaqVotesDataToFaqVoteRestAttributes($voteTransfer)
-        );
-        $restResponse->addResource($restResource);
+        $this->addTransferToResponse($voteTransfer, $restResponse);
+
         return $restResponse;
     }
 
     public function updateFaqVote(RestRequestInterface $restRequest): RestResponseInterface
     {
-        // TODO: Implement updateFaqVote() method.
+        $restResponse = $this->restResourceBuilder->createRestResponse();
+
+        $idRequest = $restRequest->getResource()->getId();
+
+        $voteTransfer = $this->mapRequestAndCustomerToTransfer($restRequest);
+        $voteTransfer = $this->faqResourceMapper->decodeVoteId($voteTransfer, $idRequest);
+        if(!$voteTransfer) {
+            $errorTransfer = new RestErrorMessageTransfer();
+            $errorTransfer->setCode(400);
+            $errorTransfer->setDetail("Wrong id!");
+            $restResponse->addError($errorTransfer);
+            return $restResponse;
+        }
+        if(!$this->authorizationGuard($voteTransfer)) {
+            $errorTransfer = new RestErrorMessageTransfer();
+            $errorTransfer->setCode(403);
+            $errorTransfer->setDetail("Not your vote");
+            $restResponse->addError($errorTransfer);
+            return $restResponse;
+        }
+
+        $voteTransfer = $this->faqClient->updateFaqVote($voteTransfer);
+
+        if(!$voteTransfer->getVote()) {
+            $errorTransfer = new RestErrorMessageTransfer();
+            $errorTransfer->setCode(500);
+            $errorTransfer->setDetail("Failed to create question. Why?");
+            $restResponse->addError($errorTransfer);
+            return $restResponse;
+        }
+        $this->addTransferToResponse($voteTransfer, $restResponse);
+
+        return $restResponse;
     }
 
     public function deleteFaqVote(RestRequestInterface $restRequest): RestResponseInterface
     {
-        // TODO: Implement deleteFaqVote() method.
+        $restResponse = $this->restResourceBuilder->createRestResponse();
+
+        $idRequest = $restRequest->getResource()->getId();
+
+        $voteTransfer = $this->mapRequestAndCustomerToTransfer($restRequest);
+        $voteTransfer = $this->faqResourceMapper->decodeVoteId($voteTransfer, $idRequest);
+        if(!$voteTransfer) {
+            $errorTransfer = new RestErrorMessageTransfer();
+            $errorTransfer->setCode(400);
+            $errorTransfer->setDetail("Wrong id!");
+            $restResponse->addError($errorTransfer);
+            return $restResponse;
+        }
+        if(!$this->authorizationGuard($voteTransfer)) {
+            $errorTransfer = new RestErrorMessageTransfer();
+            $errorTransfer->setCode(403);
+            $errorTransfer->setDetail("Not your vote");
+            $restResponse->addError($errorTransfer);
+            return $restResponse;
+        }
+        $voteTransfer = $this->faqClient->deleteFaqVote($voteTransfer);
+//      No info about error in persistence
+        $this->addTransferToResponse($voteTransfer, $restResponse);
+
+        return $restResponse;
     }
 }

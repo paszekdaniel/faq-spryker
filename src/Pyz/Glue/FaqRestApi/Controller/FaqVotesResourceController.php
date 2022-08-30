@@ -26,9 +26,9 @@ class FaqVotesResourceController extends AbstractController
         return $this->getFactory()->createFaqVotesChanger()->createFaqVote($restRequest);
     }
     public function patchAction(RestRequestInterface $restRequest): RestResponseInterface {
-
+        return $this->getFactory()->createFaqVotesChanger()->updateFaqVote($restRequest);
     }
     public function deleteAction(RestRequestInterface $restRequest): RestResponseInterface {
-
+        return $this->getFactory()->createFaqVotesChanger()->deleteFaqVote($restRequest);
     }
 }

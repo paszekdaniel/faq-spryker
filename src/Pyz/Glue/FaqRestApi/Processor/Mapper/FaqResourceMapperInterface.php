@@ -11,4 +11,7 @@ interface FaqResourceMapperInterface
 {
     public function mapFaqDataToFaqRestAttributes(FaqQuestionTransfer $faqData): RestFaqResponseAttributesTransfer;
     public function mapFaqVotesDataToFaqVoteRestAttributes(FaqVoteTransfer $transfer): RestFaqVotesResponseAttributesTransfer;
+    public function generateVoteRestId(FaqVoteTransfer $transfer): string;
+    public function decodeVoteId(FaqVoteTransfer $transfer, string $id): ?FaqVoteTransfer;
+
 }

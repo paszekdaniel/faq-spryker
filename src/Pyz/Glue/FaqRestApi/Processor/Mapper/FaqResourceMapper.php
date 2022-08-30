@@ -21,4 +21,21 @@ class FaqResourceMapper implements FaqResourceMapperInterface
     ): RestFaqVotesResponseAttributesTransfer {
         return (new RestFaqVotesResponseAttributesTransfer())->fromArray($transfer->toArray(), true);
     }
+
+    public function generateVoteRestId(FaqVoteTransfer $transfer): string
+    {
+        return  $transfer->getFkIdQuestion() . '!'. $transfer->getFkIdCustomer();
+    }
+
+    public function decodeVoteId(FaqVoteTransfer $transfer, string $id): ?FaqVoteTransfer
+    {
+        $values = explode('!', $id);
+        if(count($values) !== 2) {
+//            wrong id
+            return null;
+        }
+        $transfer->setFkIdQuestion($values[0]);
+        $transfer->setFkIdCustomer($values[1]);
+        return $transfer;
+    }
 }
