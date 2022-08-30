@@ -14,12 +14,21 @@ class FaqCommunicationMapper
         $questionTransfer->setState($data[QuestionCollectionForm::FILED_STATE]);
         $questionTransfer->setAnswer($data[QuestionCollectionForm::FIELD_DEFAULT_ANSWER]);
         $questionTransfer->setQuestion($data[QuestionCollectionForm::FIELD_DEFAULT_QUESTION]);
-        $questionTransfer->setIdQuestion($data[QuestionCollectionForm::FIELD_ID_QUESTION] ?? null);
+        $id = $data[QuestionCollectionForm::FIELD_ID_QUESTION];
+        if($id === 0 || $id === "0") {
+            $id = null;
+        }
+        $questionTransfer->setIdQuestion($id);
 
         foreach ($data[QuestionCollectionForm::FIELD_TRANSLATIONS] as $name => $translation) {
             $translationTransfer = new FaqTranslationTransfer();
+            $ok = true;
             $translationTransfer->setLanguage($name);
             foreach ($translation[QuestionTranslationForm::FIELD_VALUE_TRANSLATIONS] as $field => $item) {
+                if($item["translation"] === null) {
+                    $ok = false;
+                    break;
+                }
                 if($field === QuestionTranslationDataProvider::QUESTION) {
                     $translationTransfer->setTranslatedQuestion($item["translation"]);
                 }
@@ -27,7 +36,9 @@ class FaqCommunicationMapper
                     $translationTransfer->setTranslatedAnswer($item["translation"]);
                 }
             }
-            $questionTransfer->addTranslation($translationTransfer);
+            if($ok) {
+                $questionTransfer->addTranslation($translationTransfer);
+            }
         }
         return $questionTransfer;
     }
