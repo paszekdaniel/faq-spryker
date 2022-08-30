@@ -18,7 +18,9 @@
     <transfer name="FaqQuestion" >
         <property name="idQuestion" type="int"/>
         <property name="question" type="string"/>
+        <property name="defaultQuestion" type="string"/>
         <property name="answer" type="string"/>
+        <property name="defaultAnswer" type="string"/>
         <property name="state" type="int"/>
         <property name="fkIdUser" type="int"/>
         <property name="votesUp" type="int"/>

@@ -26,7 +26,7 @@ class FaqBusinessFactory extends AbstractBusinessFactory
     public function getFaqDeleterHandler(): FaqDeleterHandler {
         return new FaqDeleterHandler($this->getEntityManager());
     }
-    public function getCustomerFacade(): CustomerFacadeInterface {
-        return $this->getProvidedDependency(FaqDependencyProvider::CUSTOMER_FACADE);
-    }
+//    public function getCustomerFacade(): CustomerFacadeInterface {
+//        return $this->getProvidedDependency(FaqDependencyProvider::CUSTOMER_FACADE);
+//    }
 }

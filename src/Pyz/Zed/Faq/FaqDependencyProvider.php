@@ -19,14 +19,14 @@ class FaqDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addPyzFaqQuestionQuery($container);
         $container = $this->addLocaleFacadeCommunication($container);
         $container = $this->addUserFacade($container);
-        $container = $this->addCustomerFacade($container);
+//        $container = $this->addCustomerFacade($container);
 
         return $container;
     }
     public function provideBusinessLayerDependencies(Container $container)
     {
         $container = $this->addLocaleFacadeBusiness($container);
-//        $container = $this->addUserFacade($container);
+        $container = $this->addUserFacade($container);
         return $container;
     }
 
@@ -67,12 +67,13 @@ class FaqDependencyProvider extends AbstractBundleDependencyProvider
         );
         return $container;
     }
-    private function addCustomerFacade(Container $container): Container {
-        $container->set(
-            static::CUSTOMER_FACADE,
-            function (Container $container) {
-                return $container->getLocator()->customer()->facade();
-            }
-        );
-    }
+//    private function addCustomerFacade(Container $container): Container {
+//        $container->set(
+//            static::CUSTOMER_FACADE,
+//            function (Container $container) {
+//                return $container->getLocator()->customer()->facade();
+//            }
+//        );
+//        return $container;
+//    }
 }

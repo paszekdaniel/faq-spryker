@@ -5,6 +5,7 @@ namespace Pyz\Zed\Faq\Communication\Controller;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Pyz\Zed\Faq\Business\FaqFacadeInterface;
 use Pyz\Zed\Faq\Communication\FaqCommunicationFactory;
+use Pyz\Zed\Faq\Communication\FaqCommunicationMapper;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,18 +17,14 @@ class EditController extends AbstractController
 {
     public function indexAction(Request $request)
     {
-        $transfer = new FaqQuestionTransfer();
         $id = $this->castId($request->query->get('id'));
-        $transfer->setIdQuestion($id);
-
-        $transfer = $this->getFacade()->findQuestionById($transfer);
-        $faqQuestionForm = $this->getFactory()->createFaqQuestionForm($transfer)->handleRequest($request);
+        $dataProvider = $this->getFactory()->createQuestionTranslationDataProvider();
+        $data = $dataProvider->getData($id);
+        $faqQuestionForm = $this->getFactory()->createQuestionTranslationForm($data, [])->handleRequest($request);
 
         if ($faqQuestionForm->isSubmitted() && $faqQuestionForm->isValid()) {
-            /**
-             * @var FaqQuestionTransfer $questionTransfer
-             */
-            $questionTransfer = $faqQuestionForm->getData();
+            $questionTransfer = FaqCommunicationMapper::mapTranslationFormToQuestionTransfer($faqQuestionForm->getData());
+
             $currentUser = $this->getFactory()->getUserFacade()->getCurrentUser();
             $questionTransfer->setFkIdUser($currentUser->getIdUser());
 
