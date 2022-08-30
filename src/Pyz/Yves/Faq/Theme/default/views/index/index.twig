@@ -7,8 +7,13 @@
 {% block content %}
     <div>
         {% for question in data.questions %}
-        <h2>{{ question.getQuestion }}</h2>
-        <h3>{{ question.getANswer }}</h3>
+        <h2 style="padding: 10px; ">{{ question.getQuestion() }}</h2>
+        <h3 style="padding: 10px; ">{{ question.getAnswer() }}</h3>
+        <p style="padding: 10px; ">Votes Up <b> {{ question.getVotesUp() }} </b></p>
+        <p style="padding: 10px; ">Votes Down <b> {{ question.getVotesDown() }} </b></p>
+            <a style="padding: 10px; background: green; " href="/faq/vote-up?id={{ question.getIdQuestion()}}" >Vote Up</a>
+            <a style="padding: 10px; background: red; " href="/faq/vote-down?id={{ question.getIdQuestion()}}" >Vote Down</a>
+            <div style="margin-top: 10px;padding: 1px; background: black"></div>
         {% endfor %}
     </div>
 {% endblock %}

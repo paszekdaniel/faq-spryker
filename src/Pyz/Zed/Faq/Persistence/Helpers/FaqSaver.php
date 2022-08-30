@@ -80,7 +80,6 @@ class FaqSaver
             ->filterByFkIdQuestion($transfer->getFkIdQuestion())
             ->filterByFkIdCustomer($transfer->getFkIdCustomer())
             ->findOneOrCreate();
-
         return $this->mapAndSave($transfer, $voteEntity);
     }
 }
