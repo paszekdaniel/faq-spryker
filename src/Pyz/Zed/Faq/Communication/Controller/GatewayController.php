@@ -44,4 +44,7 @@ class GatewayController extends AbstractGatewayController
     public function createVoteAction(FaqVoteTransfer $voteTransfer): FaqVoteTransfer {
         return $this->getFacade()->saveVote($voteTransfer);
     }
+    public function deleteVoteAction(FaqVoteTransfer $transfer): FaqVoteTransfer {
+        return $this->getFacade()->deleteVote($transfer);
+    }
 }

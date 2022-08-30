@@ -3,7 +3,9 @@
 namespace Pyz\Glue\FaqRestApi\Processor\Mapper;
 
 use Generated\Shared\Transfer\FaqQuestionTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 use Generated\Shared\Transfer\RestFaqResponseAttributesTransfer;
+use Generated\Shared\Transfer\RestFaqVotesResponseAttributesTransfer;
 use Pyz\Zed\Faq\FaqConfig;
 
 class FaqResourceMapper implements FaqResourceMapperInterface
@@ -13,5 +15,10 @@ class FaqResourceMapper implements FaqResourceMapperInterface
     {
         $restFaqAttributesTransfer = (new RestFaqResponseAttributesTransfer())->fromArray($transfer->toArray(), true);
         return $restFaqAttributesTransfer;
+    }
+
+    public function mapFaqVotesDataToFaqVoteRestAttributes(FaqVoteTransfer $transfer
+    ): RestFaqVotesResponseAttributesTransfer {
+        return (new RestFaqVotesResponseAttributesTransfer())->fromArray($transfer->toArray(), true);
     }
 }

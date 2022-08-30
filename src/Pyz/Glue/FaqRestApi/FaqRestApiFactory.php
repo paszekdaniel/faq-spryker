@@ -7,6 +7,8 @@ use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqChanger;
 use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqChangerInterface;
 use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqReader;
 use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqReaderInterface;
+use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqVotesChanger;
+use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqVotesChangerInterface;
 use Pyz\Glue\FaqRestApi\Processor\Mapper\FaqResourceMapper;
 use Pyz\Glue\FaqRestApi\Processor\Mapper\FaqResourceMapperInterface;
 use Spryker\Client\Customer\CustomerClientInterface;
@@ -33,6 +35,14 @@ class FaqRestApiFactory extends AbstractFactory
             $this->getClient(),
             $this->getResourceBuilder(),
             $this->createFaqResourceMapper()
+        );
+    }
+    public function createFaqVotesChanger(): FaqVotesChangerInterface {
+        return new FaqVotesChanger(
+            $this->getClient(),
+            $this->getResourceBuilder(),
+            $this->createFaqResourceMapper(),
+            $this->getCustomerClient()
         );
     }
     public function getCustomerClient(): CustomerClientInterface {

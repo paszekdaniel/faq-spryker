@@ -13,17 +13,22 @@ use Spryker\Glue\Kernel\Controller\AbstractController;
  */
 class FaqVotesResourceController extends AbstractController
 {
-    //Same as get /faq I guess
-    //I have votes counting implemented there so this should work
     //And I don't think response should look like my pyz_faq_vote table (fk_id_question, fk_id_customer, vote) :)
+//    But I have counting votes implemented in FaqResourceController, and I'm not sure how to have to 2 responseTransfers
     public function getAction(RestRequestInterface $restRequest): RestResponseInterface {
-        if(!$restRequest->getResource()->getId()) {
-            return $this->getFactory()->createFaqReader()->getActiveFaqQuestions($restRequest);
-        } else {
-            return $this->getFactory()->createFaqReader()->getOneFaqQuestion($restRequest);
-        }
-//        Data from session, thanks to api there is only idCustomer
-//        $customer = $this->getFactory()->getCustomerClient()->getCustomer();
-//        dd($customer);
+//        if(!$restRequest->getResource()->getId()) {
+//            return $this->getFactory()->createFaqReader()->getActiveFaqQuestions($restRequest);
+//        } else {
+//            return $this->getFactory()->createFaqReader()->getOneFaqQuestion($restRequest);
+//        }
+    }
+    public function postAction(RestRequestInterface $restRequest): RestResponseInterface {
+        return $this->getFactory()->createFaqVotesChanger()->createFaqVote($restRequest);
+    }
+    public function patchAction(RestRequestInterface $restRequest): RestResponseInterface {
+
+    }
+    public function deleteAction(RestRequestInterface $restRequest): RestResponseInterface {
+
     }
 }
