@@ -9,17 +9,25 @@ use Generated\Shared\Transfer\FaqVoteTransfer;
 interface FaqEntityManagerInterface
 {
     /**
+     * Specification:
+     * - saves question
+     * - saves associated votes and translations when provided
+     *
      * @throws \Propel\Runtime\Exception\PropelException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function saveQuestionEntityCascade(FaqQuestionTransfer $transfer): FaqQuestionTransfer;
 
     /**
+     * Specification:
+     * - saves translation
      * @throws \Propel\Runtime\Exception\PropelException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function saveTranslationEntity(FaqTranslationTransfer $transfer): FaqTranslationTransfer;
     /**
+     * Specification:
+     * - saves vote
      * @throws \Propel\Runtime\Exception\PropelException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */

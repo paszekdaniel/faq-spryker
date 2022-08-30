@@ -13,7 +13,7 @@ use Orm\Zed\Faq\Persistence\PyzFaqVoteQuery;
 
 class FaqSaver
 {
-//    add types :)
+//    add types
     private function mapAndSave($transfer, $entity)
     {
         $entity->fromArray($transfer->toArray());
@@ -38,7 +38,7 @@ class FaqSaver
          */
         $transfer = $this->mapAndSave($transfer, $questionEntity) ;
 
-        //no associated objects where passed
+        //no associated objects where passed alongside
         if($transfer->getTranslations()->count() === 0 && $transfer->getVotes()->count() === 0) {
             return $transfer;
         }
