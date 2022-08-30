@@ -4,6 +4,8 @@ namespace Pyz\Client\FaqRestApi;
 
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
+use Generated\Shared\Transfer\FaqVoteCollectionTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -34,5 +36,32 @@ class FaqRestApiClient extends AbstractClient implements FaqRestApiClientInterfa
     public function deleteFaqQuestion(FaqQuestionTransfer $questionTransfer): FaqQuestionTransfer
     {
         return $this->getFactory()->createFaqZedStub()->deleteQuestion($questionTransfer);
+    }
+
+    public function createFaqVote(FaqVoteTransfer $transfer): FaqVoteTransfer
+    {
+        return $this->getFactory()->createFaqZedStub()->createFaqVote($transfer);
+    }
+
+    public function updateFaqVote(FaqVoteTransfer $transfer): FaqVoteTransfer
+    {
+        return $this->getFactory()->createFaqZedStub()->updateFaqVote($transfer);
+
+    }
+
+    public function deleteFaqVote(FaqVoteTransfer $transfer): FaqVoteTransfer
+    {
+        return $this->getFactory()->createFaqZedStub()->deleteFaqVote($transfer);
+
+    }
+
+    public function getAllVotes(FaqVoteCollectionTransfer $collectionTransfer): FaqVoteCollectionTransfer
+    {
+        return $this->getFactory()->createFaqZedStub()->getAllVotes($collectionTransfer);
+    }
+
+    public function getVoteByKey(FaqVoteTransfer $voteTransfer): FaqVoteTransfer
+    {
+        return $this->getFactory()->createFaqZedStub()->getVoteByKey($voteTransfer);
     }
 }

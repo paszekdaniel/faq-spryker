@@ -10,4 +10,9 @@
         <property name="votesUp" type="int" />
         <property name="votesDown" type="int" />
     </transfer>
+    <transfer name="RestFaqVotesResponseAttributes">
+        <property name="FkIdQuestion" type="int" />
+        <property name="FkIdCustomer" type="int" />
+        <property name="vote" type="int" />
+    </transfer>
 </transfers>

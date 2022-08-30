@@ -4,6 +4,8 @@ namespace Pyz\Zed\Faq\Business\Model;
 
 use Generated\Shared\Transfer\FaqQuestionCollectionTransfer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
+use Generated\Shared\Transfer\FaqVoteCollectionTransfer;
+use Generated\Shared\Transfer\FaqVoteTransfer;
 use Pyz\Zed\Faq\Business\FaqBusinessMapper;
 use Pyz\Zed\Faq\Persistence\FaqRepositoryInterface;
 use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
@@ -49,6 +51,11 @@ class FaqReaderHandler
         $questionTransfer = $this->repo->findQuestionById($questionTransfer);
         $currentLanguage = $this->localeFacade->getCurrentLocaleName();
         return FaqBusinessMapper::translateQuestion($questionTransfer, $currentLanguage);
-
+    }
+    public function findAllVotes(FaqVoteCollectionTransfer $collectionTransfer): FaqVoteCollectionTransfer {
+        return $this->repo->findAllVotes($collectionTransfer);
+    }
+    public function findVoteByKey(FaqVoteTransfer $voteTransfer): FaqVoteTransfer {
+        return $this->repo->findVoteByKey($voteTransfer);
     }
 }

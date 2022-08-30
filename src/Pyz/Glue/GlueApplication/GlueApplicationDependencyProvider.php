@@ -8,6 +8,7 @@
 namespace Pyz\Glue\GlueApplication;
 
 use Pyz\Glue\FaqRestApi\Plugin\FaqResourceRoutePlugin;
+use Pyz\Glue\FaqRestApi\Plugin\FaqVotesRoutePlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestRequestValidatorPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestUserFinderPlugin;
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokensResourceRoutePlugin;
@@ -188,6 +189,7 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
     protected function getResourceRoutePlugins(): array
     {
         return [
+            new FaqVotesRoutePlugin(),
             new FaqResourceRoutePlugin(),
             new ConcreteProductsResourceRoutePlugin(),
             new AccessTokensResourceRoutePlugin(),

@@ -32,5 +32,8 @@
     <transfer name="FaqQuestionCollection">
         <property name="questions" type="FaqQuestion[]" singular="question" />
     </transfer>
+    <transfer name="FaqVoteCollection">
+        <property name="votes" type="FaqVote[]" singular="vote" />
+    </transfer>
 
 </transfers>
