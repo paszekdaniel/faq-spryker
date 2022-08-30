@@ -20,7 +20,8 @@ class CreateTranslationController extends AbstractController
         $transfer = new FaqQuestionTransfer();
         $id = $this->castId($request->query->get("id"));
         $dataProvider = $this->getFactory()->createQuestionTranslationDataProvider();
-        $faqQuestionForm = $this->getFactory()->createQuestionTranslationForm($dataProvider->getData($id), [])->handleRequest($request);
+        $data = $dataProvider->getData($id);
+        $faqQuestionForm = $this->getFactory()->createQuestionTranslationForm($data, [])->handleRequest($request);
 
         if ($faqQuestionForm->isSubmitted() && $faqQuestionForm->isValid()) {
             dd("Submited");

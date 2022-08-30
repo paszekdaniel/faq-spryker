@@ -13,8 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class QuestionTranslationForm extends AbstractType
 {
     public const FIELD_ID_QUESTION = 'id_question';
-    public const FILED_STATE = 'state';
     public const FIELD_VALUE_TRANSLATIONS = 'value_translations';
+
 
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -41,6 +41,7 @@ class QuestionTranslationForm extends AbstractType
     protected function addTranslationFields(FormBuilderInterface $builder): self
     {
         $builder->add(self::FIELD_VALUE_TRANSLATIONS, CollectionType::class, [
+            'label' => "=====================================================",
             'entry_type' => QuestionValueTranslationForm::class,
             'entry_options' => [],
         ]);

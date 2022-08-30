@@ -29,7 +29,9 @@ class QuestionTranslationDataProvider
         $questionTransfer = $this->faqFacade->findQuestionById($questionTransfer);
         return [
             QuestionCollectionForm::FIELD_TRANSLATIONS => $this->getTranslationFields($id, $questionTransfer),
-            QuestionCollectionForm::FILED_STATE => $questionTransfer->getState() ?? FaqConfig::INACTIVE_STATE
+            QuestionCollectionForm::FILED_STATE => $questionTransfer->getState() ?? FaqConfig::INACTIVE_STATE,
+            QuestionCollectionForm::FIELD_DEFAULT_ANSWER => $questionTransfer->getAnswer(),
+            QuestionCollectionForm::FIELD_DEFAULT_QUESTION => $questionTransfer->getQuestion(),
 
         ];
     }
@@ -45,6 +47,7 @@ class QuestionTranslationDataProvider
         }
         foreach ($locales as $localeName => $localeTransfer) {
             $fields[$localeName] = [
+
                 QuestionTranslationForm::FIELD_ID_QUESTION => $id,
                 QuestionTranslationForm::FIELD_VALUE_TRANSLATIONS => $this->generateKeyValueTranslations(
                     $translations,

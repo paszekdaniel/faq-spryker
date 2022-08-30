@@ -66,11 +66,6 @@ class QuestionValueTranslationForm extends AbstractType
     {
         $builder->add(self::FIELD_TRANSLATION, TextType::class, [
             'label' => 'Translation',
-//            'constraints' => [
-//                new NotBlank([
-//                    'groups' => self::GROUP_VALUE_TRANSLATIONS,
-//                ]),
-//            ],
         ]);
 
         return $this;
