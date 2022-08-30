@@ -31,6 +31,8 @@ class FaqMapper
 
     public static function mapQuestionEntityToTransfer(FaqQuestionTransfer $questionTransfer, $question, bool $mapRelations = false): FaqQuestionTransfer {
         $questionTransfer->fromArray($question->toArray());
+        $questionTransfer->setDefaultAnswer($question->getAnswer());
+        $questionTransfer->setDefaultQuestion($question->getQuestion());
         if($mapRelations) {
             if(!$question->getPyzFaqTranslations()->isEmpty()) {
                 foreach ($question->getPyzFaqTranslations() as $translationEntity) {
