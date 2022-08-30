@@ -12,7 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class QuestionTranslationForm extends AbstractType
 {
-    public const FIELD_ID_QUESTION = 'id_question';
     public const FIELD_VALUE_TRANSLATIONS = 'value_translations';
 
 
@@ -26,15 +25,10 @@ class QuestionTranslationForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this
-            ->addIdQuestionField($builder)
             ->addTranslationFields($builder);
     }
 
-    protected function addIdQuestionField(FormBuilderInterface $builder): self
-    {
-        $builder->add(self::FIELD_ID_QUESTION, HiddenType::class);
-        return $this;
-    }
+
 
 
 

@@ -12,7 +12,8 @@ use Spryker\Zed\Locale\Business\LocaleFacadeInterface;
 
 class QuestionTranslationDataProvider
 {
-
+    public const QUESTION = "question";
+    public const ANSWER = "answer";
     protected FaqFacadeInterface $faqFacade;
     protected LocaleFacadeInterface $localeFacade;
 
@@ -30,9 +31,9 @@ class QuestionTranslationDataProvider
         return [
             QuestionCollectionForm::FIELD_TRANSLATIONS => $this->getTranslationFields($id, $questionTransfer),
             QuestionCollectionForm::FILED_STATE => $questionTransfer->getState() ?? FaqConfig::INACTIVE_STATE,
-            QuestionCollectionForm::FIELD_DEFAULT_ANSWER => $questionTransfer->getAnswer(),
-            QuestionCollectionForm::FIELD_DEFAULT_QUESTION => $questionTransfer->getQuestion(),
-
+            QuestionCollectionForm::FIELD_DEFAULT_ANSWER => $questionTransfer->getDefaultAnswer(),
+            QuestionCollectionForm::FIELD_DEFAULT_QUESTION => $questionTransfer->getDefaultQuestion(),
+            QuestionCollectionForm::FIELD_ID_QUESTION => $id,
         ];
     }
 
@@ -47,8 +48,6 @@ class QuestionTranslationDataProvider
         }
         foreach ($locales as $localeName => $localeTransfer) {
             $fields[$localeName] = [
-
-                QuestionTranslationForm::FIELD_ID_QUESTION => $id,
                 QuestionTranslationForm::FIELD_VALUE_TRANSLATIONS => $this->generateKeyValueTranslations(
                     $translations,
                     $id,
@@ -64,14 +63,14 @@ class QuestionTranslationDataProvider
     protected function generateKeyValueTranslations(array $translations, $id, $questionTransfer, string $localeName)
     {
         $results = [];
-        $results[0] = [
+        $results[self::QUESTION] = [
             QuestionValueTranslationForm::FILED_ID_QUESTION => $id,
-            QuestionValueTranslationForm::FIELD_VALUE => $questionTransfer->getQuestion(),
+            QuestionValueTranslationForm::FIELD_VALUE => $questionTransfer->getDefaultQuestion(),
             QuestionValueTranslationForm::FIELD_TRANSLATION => $this->getQuestionTranslation($translations, $localeName)
         ];
-        $results[1] = [
+        $results[self::ANSWER] = [
             QuestionValueTranslationForm::FILED_ID_QUESTION => $id,
-            QuestionValueTranslationForm::FIELD_VALUE => $questionTransfer->getAnswer(),
+            QuestionValueTranslationForm::FIELD_VALUE => $questionTransfer->getDefaultAnswer(),
             QuestionValueTranslationForm::FIELD_TRANSLATION => $this->getAnswerTranslation($translations, $localeName)
         ];
         return $results;
