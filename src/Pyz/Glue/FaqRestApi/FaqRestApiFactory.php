@@ -9,6 +9,7 @@ use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqReader;
 use Pyz\Glue\FaqRestApi\Processor\Faqs\FaqReaderInterface;
 use Pyz\Glue\FaqRestApi\Processor\Mapper\FaqResourceMapper;
 use Pyz\Glue\FaqRestApi\Processor\Mapper\FaqResourceMapperInterface;
+use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Glue\Kernel\AbstractFactory;
 
 /**
@@ -33,5 +34,8 @@ class FaqRestApiFactory extends AbstractFactory
             $this->getResourceBuilder(),
             $this->createFaqResourceMapper()
         );
+    }
+    public function getCustomerClient(): CustomerClientInterface {
+        return $this->getProvidedDependency(FaqRestApiDependencyProvider::CUSTOMER_CLIENT);
     }
 }
