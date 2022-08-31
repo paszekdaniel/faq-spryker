@@ -44,6 +44,7 @@ class FaqTable extends AbstractTable
     protected function configure(TableConfiguration $config): TableConfiguration
     {
         $config->setHeader([
+            PyzFaqQuestionTableMap::COL_ID_QUESTION => "id",
             PyzFaqQuestionTableMap::COL_QUESTION => "question",
             PyzFaqQuestionTableMap::COL_ANSWER => "answer",
             self::COL_VOTE_UP => "votes up",
@@ -93,6 +94,7 @@ class FaqTable extends AbstractTable
              */
             $row = [];
             $votesCount = $this->countVotes($question);
+            $row[PyzFaqQuestionTableMap::COL_ID_QUESTION] = $question->getIdQuestion();
             $row[PyzFaqQuestionTableMap::COL_QUESTION] = $this->generateTranslatedQuestion($question);
             $row[PyzFaqQuestionTableMap::COL_ANSWER] = $this->generateTranslatedAnswer($question);
             $row[PyzFaqQuestionTableMap::COL_STATE] = $this->mapStateToText($question->getState());
