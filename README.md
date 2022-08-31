@@ -2,7 +2,7 @@
 tables relations: faq diagram.png <br>
 
 ## TODO:
-[ ] US6 - data importer
+[x] US6 - data importer
 [ ] There are only 3 tests for easy persistence operations :)
 [ ] Pagination for yves
 [ ] Navigation in yves?
@@ -19,5 +19,6 @@ tables relations: faq diagram.png <br>
 - Glue API is FaqRestApi, instead of FaqsRestApi(S!), so data.type is faq, not faqs! <br>
 - changing in FaqRestApiConfig probably would work(but then it won't match file structure), so I leave it as it is <br>
 - Probably can throw unhandled error when id is overwritten, also ALL functions in entityManager (repo too?) throw sth <br>
-     but there isn't try catch in business. Test that if you will have time
+     but there isn't try catch in business. Test that if you will have time <br>
 - Delete response isn't based on succeeding or failing <br>
+- Table can't sort by votes count
