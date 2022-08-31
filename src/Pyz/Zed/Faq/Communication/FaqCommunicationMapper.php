@@ -15,6 +15,7 @@ class FaqCommunicationMapper
         $questionTransfer->setAnswer($data[QuestionCollectionForm::FIELD_DEFAULT_ANSWER]);
         $questionTransfer->setQuestion($data[QuestionCollectionForm::FIELD_DEFAULT_QUESTION]);
         $id = $data[QuestionCollectionForm::FIELD_ID_QUESTION];
+//        CreateController sets it to 0
         if($id === 0 || $id === "0") {
             $id = null;
         }
@@ -25,7 +26,8 @@ class FaqCommunicationMapper
             $ok = true;
             $translationTransfer->setLanguage($name);
             foreach ($translation[QuestionTranslationForm::FIELD_VALUE_TRANSLATIONS] as $field => $item) {
-                if($item["translation"] === null) {
+//                Not sure if empty string will be there
+                if($item["translation"] == null) {
                     $ok = false;
                     break;
                 }
