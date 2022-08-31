@@ -12,7 +12,7 @@ class FaqMapper
 {
     /**
      * Counts votes if provided
-     * I don't use entity->countVotes(), because it will query for each question, and I use populateRelation already
+     * I don't use entity->countVotes(), because it will query for each question, and I've used populateRelation already
      * @param FaqQuestionCollectionTransfer $questionCollectionTransfer
      * @param mixed $questions this is collection of entities
      * @param bool $mapRelations

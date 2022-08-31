@@ -55,8 +55,9 @@ class FaqTable extends AbstractTable
         $config->setSortable([
             PyzFaqQuestionTableMap::COL_QUESTION,
             PyzFaqQuestionTableMap::COL_ANSWER,
-            self::COL_VOTE_UP,
-            self::COL_VOTE_DOWN
+//  can't sort by votes, because they aren't calculated by query
+//            self::COL_VOTE_UP,
+//            self::COL_VOTE_DOWN
         ]);
         $config->setSearchable([
             PyzFaqQuestionTableMap::COL_ANSWER,
@@ -71,8 +72,6 @@ class FaqTable extends AbstractTable
 
     protected function prepareData(TableConfiguration $config)
     {
-        $language = $this->localeFacade->getCurrentLocaleName();
-
 //        Can't use with() and limit() together!
 //        $questionQuery = $this->query
 //            ->leftJoinPyzFaqTranslation()
