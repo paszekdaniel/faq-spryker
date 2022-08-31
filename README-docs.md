@@ -52,7 +52,7 @@ FaqFacadeInterface is;
 
 ## Communication Layer
 ### Forms
-We switched to CollectionForm(FaqQuestionForm is legacy) so translations field are generated based on available locales. <br>
+We switched to CollectionForm(FaqQuestionForm is legacy) so translations' field are generated based on available locales. <br>
 QuestionTranslationDataProvider with FaqCommunicationMapper ensures correct data format is provided to form, and it mapped back to transfer . <br>
 Gateway controller exposes most of the facade to clients <br>
 

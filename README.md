@@ -1,11 +1,13 @@
 # Faq module
 tables relations: faq diagram.png <br>
 
+# Documentation: README-docs.md
+
 ## TODO:
-[x] US6 - data importer
-[ ] There are only 3 tests for easy persistence operations :)
-[ ] Pagination for yves
-[ ] Navigation in yves?
+[x] US6 - data importer <br>
+[x] There are only 3 tests for easy persistence operations :) <br>
+[ ] Pagination for yves <br>
+[ ] Navigation in yves? <br>
 
 ## CHALLENGES:
 - Translation is fully working: <br>
