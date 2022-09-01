@@ -72,8 +72,8 @@ class FaqChanger implements FaqChangerInterface
 
         if(!$questionTransfer->getIdQuestion()) {
             $errorTransfer = new RestErrorMessageTransfer();
-            $errorTransfer->setCode(500);
-            $errorTransfer->setDetail("Failed to update question. Why?");
+            $errorTransfer->setCode(404);
+            $errorTransfer->setDetail("Id not found");
             $restResponse->addError($errorTransfer);
             return $restResponse;
         }
