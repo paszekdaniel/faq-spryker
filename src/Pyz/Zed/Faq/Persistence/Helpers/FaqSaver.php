@@ -42,20 +42,38 @@ class FaqSaver
         if($transfer->getTranslations()->count() === 0 && $transfer->getVotes()->count() === 0) {
             return $transfer;
         }
-        // attach translations
+//        It has to be this way because propel ignores adding by same PK
+//        So I can't edit translation by addPyzFaqTranslation
+//        I check if I change this, if so then I modify it, then I attach a new one whether I did that or not,
+//        because propel will ignore unnecessary adding
+//        TODO: map existing question to language => translation key value pairs, to fix O(n^2)
         foreach ($transfer->getTranslations() as $translation) {
             $translation->setFkIdQuestion($transfer->getIdQuestion());
+            foreach ($questionEntity->getPyzFaqTranslations() as $translationEntity) {
+                if($translationEntity->getLanguage() === $translation->getLanguage()) {
+                    $translationEntity->fromArray($translation->toArray());
+                }
+            }
             $tempEntity = (new PyzFaqTranslation())->fromArray($translation->toArray());
+//            it adds IF primary key is different from the ones that it already has
             $questionEntity->addPyzFaqTranslation($tempEntity);
         }
+
         // attach votes
+//        See attach translations
         foreach ($transfer->getVotes() as $vote) {
             $vote->setFkIdQuestion($transfer->getIdQuestion());
+            foreach ($questionEntity->getPyzFaqVotes() as $voteEntity) {
+                if($voteEntity->getFkIdCustomer() === $vote->getFkIdCustomer()) {
+                    $voteEntity->fromArray($vote->toArray());
+                }
+            }
             $tempEntity = (new PyzFaqVote())->fromArray($vote->toArray());
             $questionEntity->addPyzFaqVote($tempEntity);
         }
 //        to save relations. Actual object shouldn't do query, because it's clean.
-        $questionEntity->save();
+
+        $rows=$questionEntity->save();
         return $transfer;
     }
     /**
