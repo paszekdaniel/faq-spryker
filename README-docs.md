@@ -58,6 +58,16 @@ Gateway controller exposes most of the facade to clients <br>
 
 ## Rest api
 There are 2 exposed endpoints /faq and /faq-votes for questions and votes. They expose 4 methods get,post patch and delete <br>
+| url              	| method 	| is protected 	| type      	| attributes                                                                      	| responses     	|
+|------------------	|--------	|--------------	|-----------	|---------------------------------------------------------------------------------	|---------------	|
+| /faq/{$id}       	| get    	| false        	| faq       	| NA                                                                              	| 200           	|
+| /faq             	| post   	| true         	| faq       	| question: "string"<br>answer: "string"<br>state: "int"(FaqConfig::VOTE_UP/DOWN) 	| 201, 403      	|
+| /faq/{$id}       	| patch  	| true         	| faq       	| question: "string"<br>answer: "string"<br>state: "int"(FaqConfig::VOTE_UP/DOWN) 	| 200, 403, 404 	|
+| /faq/{$id}       	| delete 	| true         	| faq       	| NA                                                                              	| 204, 403, 404 	|
+| /faq-votes/{$PK} 	| get    	| false        	| faq-votes 	| NA                                                                              	| 200           	|
+| /faq-votes       	| post   	| true         	| faq-votes 	| fkIdQuestion: "int"<br>vote: "int"(FaqConfig::VOTE_UP/DOWN)                     	| 201, 403      	|
+| /faq-votes/{$PK} 	| patch  	| true         	| faq-votes 	| fkIdQuestion: "int"<br>vote: "int"(FaqConfig::VOTE_UP/DOWN)                     	| 200, 403, 404 	|
+| /faq-votes/{$PK} 	| delete 	| true         	| faq-votes 	| NA                                                                              	| 204, 403, 404 	|
 For more see README-restApi.md <br>
 
 ## Yves
