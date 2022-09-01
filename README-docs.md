@@ -12,7 +12,7 @@ Same case as in translations, thanks to PK customer can have 1 vote per question
 ## Business facade
 General rules are: <br>
 When it fetches relations(including fetch by id) it counts votes automatically in persistence layer(while mapping from entity to transfer),<br>
-and translates in business layer. <br>
+and translates questions in business layer. <br>
 When relations are NOT provided question won't be translated, and votes count will be null. <br>
 Every saveSth uses propel findOneOrCreate method. So from user perspective there is no difference between creating new and updating old one <br>
 Where ever there is searching by active question we filter state by  FaqConfig::STATE_ACTIVE constant. <br>
@@ -57,7 +57,7 @@ QuestionTranslationDataProvider with FaqCommunicationMapper ensures correct data
 Gateway controller exposes most of the facade to clients <br>
 
 ## Rest api
-There are 2 exposed endpoints /faq and /faq-vote for questions and votes. They expose 4 methods get,post patch and delete <br>
+There are 2 exposed endpoints /faq and /faq-votes for questions and votes. They expose 4 methods get,post patch and delete <br>
 For more see README-restApi.md <br>
 
 ## Yves

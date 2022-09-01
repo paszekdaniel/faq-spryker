@@ -56,6 +56,7 @@ class FaqTable extends AbstractTable
         $config->setSortable([
             PyzFaqQuestionTableMap::COL_QUESTION,
             PyzFaqQuestionTableMap::COL_ANSWER,
+            PyzFaqQuestionTableMap::COL_ID_QUESTION
 //  can't sort by votes, because they aren't calculated by query
 //            self::COL_VOTE_UP,
 //            self::COL_VOTE_DOWN

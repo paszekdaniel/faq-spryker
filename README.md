@@ -16,7 +16,7 @@ tables relations: faq diagram.png <br>
 - Votes: <br>
 * Customer can vote on 1 question once, can change vote by voting again on the opposite vote <br>
 * No revoking mechanism
-* Votes are counted when fetching, so yves, glue and backoffice table all display voting count
+* Votes are counted when fetched, so yves, glue and backoffice table all display voting count
 ## PROBLEMS:
 - Glue API is FaqRestApi, instead of FaqsRestApi(S!), so data.type is faq, not faqs! <br>
 - changing in FaqRestApiConfig probably would work(but then it won't match file structure), so I leave it as it is <br>
