@@ -66,6 +66,25 @@ class FaqFacadeTest extends Unit
             $this->assertEquals($vote->getFkIdQuestion(), $result->getIdQuestion());
         }
     }
+    public function testEditSaveCascade(): void {
+        $transfer = $this->createQuestionWithRelationsAndFindItById();
+        foreach ($transfer->getTranslations() as $translation) {
+            $translation->setTranslatedAnswer("NEW");
+        }
+        foreach ($transfer->getVotes() as $vote) {
+            $vote->setVote(FaqConfig::VOTE_DOWN);
+        }
+        /**
+         * @var FaqQuestionTransfer $result
+         */
+        $result = $this->tester->getFacade()->saveQuestion($transfer);
+        foreach ($result->getTranslations() as $translation) {
+            $this->assertEquals($translation->getTranslatedAnswer(), "NEW");
+        }
+        foreach ($result->getVotes() as $vote) {
+            $this->assertEquals($vote->getVote(), FaqConfig::VOTE_DOWN);
+        }
+    }
 //    No need to test cascade, since mysql does it
     public function testDeleteQuestion(): void {
         $transfer = (new FaqQuestionBuilder([
