@@ -66,8 +66,8 @@ There are 2 exposed endpoints /faq and /faq-votes for questions and votes. They 
 | /faq/{$id}       	| delete 	| true         	| faq       	| NA                                                                              	| 204, 403, 404 	|
 | /faq-votes/{$PK} 	| get    	| false        	| faq-votes 	| NA                                                                              	| 200           	|
 | /faq-votes       	| post   	| true         	| faq-votes 	| fkIdQuestion: "int"<br>vote: "int"(FaqConfig::VOTE_UP/DOWN)                     	| 201, 403      	|
-| /faq-votes/{$PK} 	| patch  	| true         	| faq-votes 	| fkIdQuestion: "int"<br>vote: "int"(FaqConfig::VOTE_UP/DOWN)                     	| 200, 403, 404 	|
-| /faq-votes/{$PK} 	| delete 	| true         	| faq-votes 	| NA                                                                              	| 204, 403, 404 	|
+| /faq-votes/{$PK} 	| patch  	| true         	| faq-votes 	| vote: "int"(FaqConfig::VOTE_UP/DOWN)                                             	| 200, 400,403, 404 	|
+| /faq-votes/{$PK} 	| delete 	| true         	| faq-votes 	| NA                                                                              	| 204, 400,403, 404 	|
 For more see README-restApi.md <br>
 
 ## Yves
