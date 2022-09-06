@@ -5,6 +5,7 @@ namespace Pyz\Zed\FaqSearch\Business\Writer;
 use Generated\Shared\Transfer\FaqQuestionTransfer;
 use Orm\Zed\Faq\Persistence\PyzFaqQuestionQuery;
 use Orm\Zed\FaqSearch\Persistence\PyzFaqQuestionSearchQuery;
+use Pyz\Zed\FaqSearch\Business\FaqSearchBusinessMapper;
 
 class QuestionSearchWriter
 {
@@ -13,14 +14,15 @@ class QuestionSearchWriter
             ->filterByIdQuestion($idQuestion)
             ->findOne();
 
-        $questionTransfer = new FaqQuestionTransfer();
-        $questionTransfer->fromArray($questionEntity->toArray());
+//        $questionTransfer = new FaqQuestionTransfer();
+//        $questionTransfer->fromArray($questionEntity->toArray());
 
         $searchEntity = PyzFaqQuestionSearchQuery::create()
             ->filterByFkFaqQuestion($idQuestion)
             ->findOneOrCreate();
         $searchEntity->setFkFaqQuestion($idQuestion);
-        $searchEntity->setData($questionTransfer->toArray());
+        $data = FaqSearchBusinessMapper::mapFaqEntityToSearchEntityData($questionEntity);
+        $searchEntity->setData($data);
 
         $searchEntity->save();
     }
