@@ -3,6 +3,7 @@
 namespace Pyz\Zed\DataImport\Business\Model\Faq;
 
 use Orm\Zed\Faq\Persistence\PyzFaqQuestionQuery;
+use Pyz\Zed\Faq\Dependency\FaqEvents;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\PublishAwareStep;
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
@@ -25,6 +26,7 @@ class FaqWriterStep extends PublishAwareStep implements DataImportStepInterface
 
         if($questionEntity->isNew() || $questionEntity->isModified()) {
             $questionEntity->save();
+            $this->addPublishEvents(FaqEvents::ENTITY_PYZ_FAQ_QUESTION_CREATE, $questionEntity->getIdQuestion());
         }
     }
 }

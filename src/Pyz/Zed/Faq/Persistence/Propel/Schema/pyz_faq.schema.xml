@@ -13,6 +13,9 @@
         <foreign-key foreignTable="spy_user" onDelete="CASCADE">
             <reference local="fk_id_user" foreign="id_user"/>
         </foreign-key>
+        <behavior name="event">
+            <parameter name="pyz_faq_question_all" column="*"/>
+        </behavior>
     </table>
     <table name="pyz_faq_vote">
         <column name="fk_id_question" required="true" primaryKey="true" type="INTEGER"/>
@@ -28,10 +31,10 @@
     <table name="pyz_faq_translation">
         <column name="fk_id_question" required="true" primaryKey="true" type="INTEGER"/>
         <column name="language" primaryKey="true" required="true" type="VARCHAR" size="32"/>
-        <column name="translated_question" required="true" type="LONGVARCHAR" />
-        <column name="translated_answer" required="true" type="LONGVARCHAR" />
-        <foreign-key foreignTable="pyz_faq_question" onDelete="CASCADE" >
-            <reference local="fk_id_question" foreign="id_question" />
+        <column name="translated_question" required="true" type="LONGVARCHAR"/>
+        <column name="translated_answer" required="true" type="LONGVARCHAR"/>
+        <foreign-key foreignTable="pyz_faq_question" onDelete="CASCADE">
+            <reference local="fk_id_question" foreign="id_question"/>
         </foreign-key>
     </table>
 </database>
