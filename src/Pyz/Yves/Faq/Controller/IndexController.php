@@ -20,6 +20,8 @@ class IndexController extends AbstractController
 ////            $question->getIdQuestion();
 ////            $question->getVo
 //        }
+//        $data = $this->getClient()->getFaqQuestionFromSearchById('1');
+//        dd($data);
         return $this->view(
             $data,
             [],

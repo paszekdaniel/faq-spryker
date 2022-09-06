@@ -9,5 +9,5 @@ interface FaqClientInterface
 {
     public function getActiveFaqQuestionCollection(FaqQuestionCollectionTransfer $questionCollectionTransfer): FaqQuestionCollectionTransfer;
     public function postVote(FaqVoteTransfer $voteTransfer): FaqVoteTransfer;
-
+    public function getFaqQuestionFromSearchById(string $idQuestion): array;
 }

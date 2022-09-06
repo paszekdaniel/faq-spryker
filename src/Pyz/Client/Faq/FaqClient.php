@@ -21,4 +21,18 @@ class FaqClient extends AbstractClient implements FaqClientInterface
     {
         return $this->getFactory()->createFaqZedStub()->postVote($voteTransfer);
     }
+
+    public function getFaqQuestionFromSearchById(string $idQuestion): array
+    {
+        $searchQuery = $this->getFactory()->createFaqQueryPlugin($idQuestion);
+        $resultFormatters = $this->getFactory()->getSearchQueryFormatters();
+
+        $searchResults = $this->getFactory()->getSearchClient()
+            ->search(
+                $searchQuery,
+                $resultFormatters
+            );
+//        dd($searchResults);
+        return $searchResults['faq_question'] ?? [];
+    }
 }
